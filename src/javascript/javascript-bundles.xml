@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bs:bundlesConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:bs="http://mobile.sensis.com.au/build-scripts"
+    xsi:schemaLocation="http://mobile.sensis.com.au/build-scripts au.com.sensis.mobile.bundles.xsd">
+    
+    <!--
+      - Example:     
+      
+        <bundles basename="map-component" subpackage="map">
+            <bundle name="common" abstract="true">
+                <fileset dir="${src.javascript.dir}/device-invariant">
+                </fileset>
+            </bundle>
+            <bundle name="default" parent="common">
+                <fileset dir="${src.javascript.dir}/device-variant/default">
+                </fileset>
+            </bundle>
+            <bundle name="iphone" parent="common">
+                <fileset dir="${src.javascript.dir}/device-variant/iphone">
+                </fileset>
+            </bundle>
+        </bundles>
+    
+     -->
+              
+    <bundles basename="devicelocation-component" subpackage="devicelocation">
+        <bundle name="Firefox">
+            <fileset dir="${src.javascript.dir}/devicelocation/device-variant">
+            	<include name="**/location_Firefox.js" />
+            </fileset>
+        </bundle>
+        <bundle name="IPhone">
+            <fileset dir="${src.javascript.dir}/devicelocation/device-variant">
+            	<include name="**/location_Iphone.js" />
+            </fileset>
+        </bundle>
+        <bundle name="RIM">
+            <fileset dir="${src.javascript.dir}/devicelocation/device-variant">
+            	<include name="**/location_RIM.js" />
+            </fileset>
+        </bundle>
+    </bundles>
+     
+</bs:bundlesConfig>

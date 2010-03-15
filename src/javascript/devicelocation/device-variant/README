@@ -1,0 +1,1 @@
+By convention, JavaScript that depends on the device type goes here, usually in subdirectories per device type. eg. iphone

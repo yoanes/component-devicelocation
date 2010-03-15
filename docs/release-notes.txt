@@ -1,0 +1,31 @@
+==== Version 1.0.8 (tag: template_v1_0_8) ====
+
+Added:
+* log4j.xml.sandpit-dev
+* log4j.xml.sandpit-test
+* mcs.properties.sandpit-dev
+* mcs.properties.sandpit-test
+
+==== Version 1.0.7 (tag: template_v1_0_7) ====
+
+Bug fixes:
+* templateComponentSpringMVCContext.xml: template.comp.getJavaScriptBundle bean had incorrect
+  contextRootComponentPrefix property value set.
+* template-component.properties contained redundant property. 
+* mcs.properties.desk: couple of paths updated.
+* core-environment.properties.desk: 5path updated.
+* javascript source is no in a component specific sub-directory under src/javascript.
+
+==== Version 1.0.6 (tag: template_v1_0_6) ====
+
+Deliverable from iteration 1.0.6 (and 1.0.5 since I skipped that tag) 
+of the rockit Common UI project (http://jira.sensis.com.au/browse/CUI). 
+These iterations focused mainly on stabilising the framework.
+
+==== Version 1.0.4 (tag: template_v1_0_4) ====
+
+Deliverable from iteration 1.0.4 of the rockit Common UI project 
+(http://jira.sensis.com.au/browse/CUI). This iteration focused mainly 
+on adding logging support to the current framework, adding a template
+component and fixing up various other, smaller issues.
+ 

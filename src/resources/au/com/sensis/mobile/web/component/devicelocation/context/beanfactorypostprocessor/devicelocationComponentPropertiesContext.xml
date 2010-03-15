@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:util="http://www.springframework.org/schema/util"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+                
+    <!-- Load properties from mandatory file provided by this component.-->            
+    <bean id="devicelocation.comp.properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:/au/com/sensis/mobile/web/component/devicelocation/devicelocation-component.properties</value>
+                
+                <!-- Load a platform dependent environment properties file. -->
+                <value>classpath:/au/com/sensis/mobile/web/component/devicelocation/devicelocation-environment.properties.@{global.platform}</value>
+            </list>
+        </property>
+    </bean>                
+    
+    <!-- Define PropertyPlaceholderConfigurer that merges the mandatory properties with optional properties. -->
+    <bean class="au.com.sensis.mobile.web.component.core.spring.LazyPropertiesInjectingPropertyPlaceholderConfigurer">
+        <!-- Default properties provided by this component. -->
+        <property name="propertiesBeanName" value="devicelocation.comp.properties"/>
+        
+        <property name="placeholderPrefix" value="@{devicelocation."/>
+        
+        <!-- Optional properties provided by the client of this component to override the default properties. -->
+        <property name="locations">
+            <list>
+                <value>classpath:/devicelocation-component.properties</value>
+                <value>classpath:/devicelocation-environment.properties</value>
+            </list>
+        </property>
+        
+        <property name="ignoreResourceNotFound" value="true"/>
+    </bean>
+</beans>

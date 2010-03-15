@@ -1,0 +1,2 @@
+Taglibs for the showcase. To override your component's tld file for the showcase (such as to point to /WEB-INF instead of /META-INF),
+give the file an extra jarexpanded extension. eg. map.tld.jarexpanded.
