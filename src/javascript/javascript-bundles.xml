@@ -24,12 +24,16 @@
      -->
               
     <bundles basename="devicelocation-component" subpackage="devicelocation">
-        <bundle name="Firefox">
+    	<bundle name="common" abstract="true">
+    		<fileset dir="${src.javascript.dir}/devicelocation/device-invariant">
+    		</fileset>
+    	</bundle>
+        <bundle name="Firefox" parent="common">
             <fileset dir="${src.javascript.dir}/devicelocation/device-variant">
             	<include name="**/location_Firefox.js" />
             </fileset>
         </bundle>
-        <bundle name="IPhone">
+        <bundle name="iphone" parent="common">
             <fileset dir="${src.javascript.dir}/devicelocation/device-variant">
             	<include name="**/location_Iphone.js" />
             </fileset>
