@@ -66,5 +66,32 @@
                 </url>
             </content>
         </variant>
+        <variant>
+            <type>script</type>
+            <selection>
+                <targeted>
+                    <devices>
+                        <device>RIM-Blackberry-9000</device>
+                    </devices>
+                </targeted>
+            </selection>
+            <meta-data>
+                <script>
+                    <encoding>javascript</encoding>
+                    <character-set>utf-8</character-set>
+                </script>
+            </meta-data>
+            <content>
+                <url>
+                    <base>
+                        <policy-reference>
+                            <name>/comp/devicelocation/devicelocation-scripts.mgrp</name>
+                            <type>base-url</type>
+                        </policy-reference>
+                    </base>
+                    <relative>devicelocation/js/devicelocation-component-RIM_Bold.js</relative>
+                </url>
+            </content>
+        </variant>
     </variants>
 </variable-policy>
