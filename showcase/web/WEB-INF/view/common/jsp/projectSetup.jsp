@@ -7,5 +7,14 @@
 
 <map:setup map="${map}" />
 <mcs:script src="/comp/devicelocation/scripts/location.mscr" />
-<mcs:script type="text/javascript">var gps; window.addEvent('load', function() { gps = new LocationUtilities(); gps.locate(); });</mcs:script>
+<mcs:script type="text/javascript">
+	window.addEvent('load', function() { 
+		new DeviceLocation(_DEVICELOCATION_WM_.Locate,null,null);
+		$('locateMeButton').addEvent('click', function(e) {
+			DEVICELOCATION.instances[0].locate();
+			return false;
+		});
+	});
+	
+</mcs:script>
 
