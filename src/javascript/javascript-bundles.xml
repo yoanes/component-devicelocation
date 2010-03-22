@@ -4,20 +4,16 @@
     xsi:schemaLocation="http://mobile.sensis.com.au/build-scripts au.com.sensis.mobile.bundles.xsd">
               
     <bundles basename="devicelocation-component" subpackage="devicelocation">
-    	<bundle name="common" abstract="true">
-    		<fileset dir="${src.javascript.dir}/devicelocation/device-invariant">
-    		</fileset> 
-    	</bundle>
-        <bundle name="Firefox" parent="common">
+        <bundle name="Firefox">
             <fileset dir="${src.javascript.dir}/devicelocation/device-variant">
             	<include name="**/location_Firefox.js" />
             </fileset>
         </bundle>
-        <bundle name="iphone" parent="common">
+        <bundle name="iphone">
             <fileset dir="${src.javascript.dir}/devicelocation/device-variant/iphone">
             </fileset>
         </bundle>
-        <bundle name="RIM_Bold" parent="common">
+        <bundle name="RIM_Bold">
             <fileset dir="${src.javascript.dir}/devicelocation/device-variant/rim-bold">
             </fileset>
         </bundle>

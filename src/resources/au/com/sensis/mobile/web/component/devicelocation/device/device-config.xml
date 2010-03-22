@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:deviceConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:core="http://mobile.sensis.com.au/web/component/core/device"
+    xmlns:devicelocation="http://mobile.sensis.com.au/web/component/devicelocation/device"
+    xsi:schemaLocation="http://mobile.sensis.com.au/web/component/devicelocation/device au.com.sensis.mobile.web.component.devicelocation.device.xsd
+        http://mobile.sensis.com.au/web/component/core/device au.com.sensis.mobile.web.component.core.device.xsd">
+        
+    <!-- 
+      - Component specific device related configuration.
+      -->
+      
+    <deviceConfig xsi:type="devicelocation:DeviceConfigType">
+        <deviceId>Apple</deviceId>
+        <deviceLocationAware>true</deviceLocationAware>
+    </deviceConfig>
+    <deviceConfig xsi:type="devicelocation:DeviceConfigType">
+        <deviceId>Android-OS</deviceId>
+        <deviceLocationAware>true</deviceLocationAware>
+    </deviceConfig>   
+</core:deviceConfigs>
