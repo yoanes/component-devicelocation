@@ -118,7 +118,7 @@ var DeviceLocation = new Class({
 	},
 	
 	pointWithinRadius: function(radius) {
-		if(this.lastRecordedPosition <= radius) return true;
+		if(this.lastRecordedPosition.accuracy <= radius) return true;
 		else return false;
 	},
 

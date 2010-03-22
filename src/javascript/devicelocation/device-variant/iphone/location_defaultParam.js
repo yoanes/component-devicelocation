@@ -1,4 +1,6 @@
-_DEVICELOCATION_WM_.defaultProcessLocation = function(position, timestamp) {
+_DEVICELOCATION_WM_ = {};
+
+_DEVICELOCATION_WM_.processLocation = function(position) {
 	/* grab the user location lat lon and convert it to that of EMS' */
 	var userLatLon = MAP.instances[0].formatLatLon(position);
 	/* grab the location in px */
@@ -12,9 +14,19 @@ _DEVICELOCATION_WM_.defaultProcessLocation = function(position, timestamp) {
 	MAP.instances[0].Map.pan(panBy.x, panBy.y, {animate:true});
 	/* zoom in if the map is zoom out too much */
 	if(MAP.instances[0].Map.getZoom() < 9)
-		MAP.instances[0].Map.zoomTo.delay(500, this, new Array(11));
-	/* alternate version
-	 * setTimeout(function() {EMS.Util.smoothZoom(MAP.instances[0].Map, MAP.instances[0].Map.getCenter(), userLatLon, 11 );} , 500);
-	 * 
-	 */
-}
+		setTimeout(function() {EMS.Util.smoothZoom(MAP.instances[0].Map, MAP.instances[0].Map.getCenter(), userLatLon, 11 );} , 500);
+	/* alternate version */
+	/*	MAP.instances[0].Map.zoomTo.delay(500, this, new Array(11)); */	
+	
+	Reporting.to('http://'+window.location.host+'/?lat='+userLatLon.latitude+'&lon='+userLatLon.longitude');
+};
+
+_DEVICELOCATION_WM_.Locate = {};
+_DEVICELOCATION_WM_.Locate.onlocate = null;
+_DEVICELOCATION_WM_.Locate.onerror = null;
+_DEVICELOCATION_WM_.Locate.onprelocate= null;
+
+_DEVICELOCATION_WM_.AutoLocate = {};
+_DEVICELOCATION_WM_.AutoLocate.onlocate = null;
+_DEVICELOCATION_WM_.AutoLocate.onerror = null;
+_DEVICELOCATION_WM_.AutoLocate.onprelocate= null;
