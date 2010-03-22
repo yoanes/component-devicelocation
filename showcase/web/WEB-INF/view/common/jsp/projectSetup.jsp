@@ -8,10 +8,54 @@
 <map:setup map="${map}" />
 <mcs:script src="/comp/devicelocation/scripts/location.mscr" />
 <mcs:script type="text/javascript">
+
+	/* define some global var within the namespace */
+	_DEVICELOCATION_WM_.stop = false;
+	_DEVICELOCATION_WM_.position = null;
+	_DEVICELOCATION_WM_.loop = null;
+	_DEVICELOCATION_WM_.accuracy = null;
+	
+	/* the method to run the interval */
+	function keepLocating(timeout, recency, proximity) {
+		/* do initialization */
+		if(DEVICELOCATION.instances.length == 0) {
+			new DeviceLocation({'onlocate': function(position) {
+				if(_DEVICELOCATION_WM_.position == null) {
+					_DEVICELOCATION_WM_.position = position;
+					_DEVICELOCATION_WM_.accuracy = position.accuracy;
+					
+					if(DEVICELOCATION.instances[0].pointWithinRadius(proximity))
+						_DEVICELOCATION_WM_.stop = true;
+				}
+				else if((position.accuracy != null) && 
+						(position.accuracy < _DEVICELOCATION_WM_.accuracy)) {
+					_DEVICELOCATION_WM_.position = position;
+					_DEVICELOCATION_WM_.accuracy = position.accuracy
+					
+					if(DEVICELOCATION.instances[0].pointWithinRadius(proximity))
+						_DEVICELOCATION_WM_.stop = true;
+				}
+			}.bind(this)}, null, null);
+		}
+		
+		/* set the timeout as specified */
+		setTimeout(function() { _DEVICELOCATION_WM_.stop = true; }, timeout);
+		
+		/* locate while flag is off
+		 * and locate every 2 second
+		 */
+		_DEVICELOCATION_WM_.loop = setInterval(function() { 
+			DEVICELOCATION.instances[0].locate(); 
+			if(_DEVICELOCATION_WM_.stop) {
+				clearInterval(_DEVICELOCATION_WM_.loop);
+				_DEVICELOCATION_WM_.processLocation(_DEVICELOCATION_WM_.position);
+			}
+		}, 2000);
+	}
+	
 	window.addEvent('load', function() { 
-		new DeviceLocation(_DEVICELOCATION_WM_.Locate,null,null);
 		$('locateMeButton').addEvent('click', function(e) {
-			DEVICELOCATION.instances[0].locate();
+			keepLocating(10000, 0, 5);
 			return false;
 		});
 	});
