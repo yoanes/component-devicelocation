@@ -6,7 +6,7 @@
     <bundles basename="devicelocation-component" subpackage="devicelocation">
     	<bundle name="common" abstract="true">
     		<fileset dir="${src.javascript.dir}/devicelocation/device-invariant">
-    		</fileset>
+    		</fileset> 
     	</bundle>
         <bundle name="Firefox" parent="common">
             <fileset dir="${src.javascript.dir}/devicelocation/device-variant">
@@ -14,11 +14,7 @@
             </fileset>
         </bundle>
         <bundle name="iphone" parent="common">
-        	<fileset dir="${src.javascript.dir}/devicelocation/device-variant/rim-bold">
-        		<include name="**/location_defaultParam.js" />
-            </fileset>
             <fileset dir="${src.javascript.dir}/devicelocation/device-variant/iphone">
-            	<include name="**/location_Iphone.js" />
             </fileset>
         </bundle>
         <bundle name="RIM_Bold" parent="common">
