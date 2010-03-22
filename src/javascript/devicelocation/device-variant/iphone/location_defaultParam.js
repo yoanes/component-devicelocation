@@ -18,7 +18,7 @@ _DEVICELOCATION_WM_.processLocation = function(position) {
 	/* alternate version */
 	/*	MAP.instances[0].Map.zoomTo.delay(500, this, new Array(11)); */	
 	
-	Reporting.to('http://'+window.location.host+'/?lat='+userLatLon.latitude+'&lon='+userLatLon.longitude');
+	Reporting.to('http://'+window.location.host+'/?lat='+userLatLon.latitude+'&lon='+userLatLon.longitude);
 };
 
 _DEVICELOCATION_WM_.Locate = {};
