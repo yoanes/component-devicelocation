@@ -16,7 +16,7 @@
 	_DEVICELOCATION_WM_.accuracy = null;
 	
 	/* the method to run the interval */
-	function keepLocating(timeout, recency, proximity) {
+	_DEVICELOCATION_WM_.keepLocating = function(timeout, recency, proximity) {
 		/* do initialization */
 		if(DEVICELOCATION.instances.length == 0) {
 			new DeviceLocation({'onlocate': function(position) {
@@ -51,13 +51,13 @@
 				_DEVICELOCATION_WM_.processLocation(_DEVICELOCATION_WM_.position);
 			}
 		}, 2000);
-	}
+	};
 	
 	window.addEvent('load', function() { 
-		$('locateMeButton').addEvent('click', function(e) {
-			keepLocating(10000, 0, 5);
+		$('locateMeButton').addEventListener('click', function(e) {
+			_DEVICELOCATION_WM_.keepLocating(10000, 0, 5);
 			return false;
-		});
+		}, false);
 	});
 	
 </mcs:script>
