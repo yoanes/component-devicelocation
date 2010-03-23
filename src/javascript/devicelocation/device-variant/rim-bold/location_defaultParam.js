@@ -2,7 +2,7 @@ _DEVICELOCATION_WM_ = {};
 
 _DEVICELOCATION_WM_.processLocation = function(position, timestamp) {
 	/* do redirect for now */
-	window.location = 'http://'+window.location.host+'/?lat='+position.latitude+'&lon='+position.longitude;
+	window.location = 'http://'+window.location.host+'/?dlat='+position.latitude+'&dlon='+position.longitude;
 };
 
 _DEVICELOCATION_WM_.Locate = {};

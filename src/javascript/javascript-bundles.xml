@@ -9,8 +9,12 @@
             	<include name="**/location_Firefox.js" />
             </fileset>
         </bundle>
-        <bundle name="iphone">
+        <bundle name="iphone">        
+        	<fileset dir="${src.javascript.dir}/devicelocation/device-variant/rim-bold">
+        		<include name="**/location_defaultParam.js" />
+            </fileset>
             <fileset dir="${src.javascript.dir}/devicelocation/device-variant/iphone">
+            	<include name="**/location_Iphone.js" />
             </fileset>
         </bundle>
         <bundle name="RIM_Bold">
