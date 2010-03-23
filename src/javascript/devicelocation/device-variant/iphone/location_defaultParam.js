@@ -18,6 +18,15 @@ _DEVICELOCATION_WM_.processLocation = function(position) {
 	/* alternate version */
 	/*	MAP.instances[0].Map.zoomTo.delay(500, this, new Array(11)); */	
 	
+	MAP.instances[0].Geocoder.reverseGeocode(userLatLon.longitude, userLatLon.latitude, function(addresses) {
+		if(addresses.results.length>0){
+			var address = addresses.results[0]; 
+			var displayAddress = "";
+			displayAddress += address.streetNumber + " " + address.street.fullName + ", " + address.suburb + ", " + address.state;
+			$('currentAddress').innerHTML = displayAddress;
+		}
+	});
+	
 	Reporting.to('http://'+window.location.host+'/?lat='+userLatLon.latitude+'&lon='+userLatLon.longitude);
 };
 
