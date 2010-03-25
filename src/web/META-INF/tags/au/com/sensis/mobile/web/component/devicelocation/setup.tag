@@ -16,6 +16,6 @@
 <logging:setup />
 
 <%-- Scripts for current component. --%>
-<core:script type="text/javascript" src="${compMcsBasePath}/devicelocation/scripts/location.mscr"></mcs:script>
+<core:script type="text/javascript" src="${compMcsBasePath}/devicelocation/scripts/location.mscr"></core:script>
 
 <logging:info logger="${logger}" message="Exiting setup.tag" />

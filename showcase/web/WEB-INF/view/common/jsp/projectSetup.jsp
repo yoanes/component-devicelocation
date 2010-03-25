@@ -6,7 +6,7 @@
   --%>
 
 <map:setup map="${map}" />
-<mcs:script src="/comp/devicelocation/scripts/location.mscr" />
+<devicelocation:setup />
 <mcs:script type="text/javascript">
 
 	/* define some global var within the namespace */
