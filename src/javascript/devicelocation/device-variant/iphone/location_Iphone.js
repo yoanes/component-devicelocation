@@ -24,11 +24,13 @@ var DeviceLocation = new Class({
 	
 	/*** other options ***/
 	
-	/* timeout before we stop trying and give back the final result */
+	/* timeout before we stop trying and give back the error */
 	_timeout: 2000,
 	
 	/* how long should the position be cached */
-	_recency: 0,
+	_maximumAge: 0,
+	
+	_enableHighAccuracy: false,
 	/*** --- ***/
 	
 	nth: null,
@@ -56,7 +58,8 @@ var DeviceLocation = new Class({
 		
 		if($defined(options)) {
 			if($defined(options.timeout)) this._timeout = options.timeout;
-			if($defined(options.recency)) this._recency = options.recency;
+			if($defined(options.maximumAge)) this._maximumAge = options.maximumAge;
+			if($defined(options.enableHighAccuracy)) this._maximumAge = options.enableHighAccuracy;
 		}
 		
 		/* add to the global component instances */
@@ -123,12 +126,12 @@ var DeviceLocation = new Class({
 	},
 
 	locate: function() {
-		navigator.geolocation.getCurrentPosition(this.parseLocation_locate.bind(this), this.parseError_locate.bind(this), {'maximumAge': this._recency, 'timeout': this._timeout});
+		navigator.geolocation.getCurrentPosition(this.parseLocation_locate.bind(this), this.parseError_locate.bind(this), {'maximumAge': this._maximumAge, 'timeout': this._timeout, 'enableHighAccuracy': this._enableHighAccuracy});
 	},
 	
 	/** the below are assumed not to be used at this stage. Usefull for 'followMe' kind of functionality **/
 	autoLocate: function(){
-		this.locationId = navigator.geolocation.watchPosition(this.parseLocation_autolocate.bind(this), this.parseError_autolocate.bind(this), {'maximumAge': this._recency, 'timeout': this_timout});
+		this.locationId = navigator.geolocation.watchPosition(this.parseLocation_autolocate.bind(this), this.parseError_autolocate.bind(this), {'maximumAge': this._maximumAge, 'timeout': this_timout, 'enableHighAccuracy': this._enableHighAccuracy});
 	},
 	
 	stop: function() {
