@@ -1,3 +1,8 @@
-==== Version 1.0.2 (tag: devicelocation_v1_0_002) ====
+==== Version 1.0.1-003 (tag: devicelocation_v1_0_1_003) ====
 
 Initial Release.
+
+==== Version 1.0.1-004 (tag: devicelocation_v1_0_1_004) ====
+
+* Add a devicelocation:setup tag for the client sites to use.
+* Ensure component only targets Android & iPhone.
