@@ -1,6 +1,8 @@
 _DEVICELOCATION_WM_ = {};
 
 _DEVICELOCATION_WM_.processLocation = function(position) {
+	if(position == null) return;
+	
 	/* grab the user location lat lon and convert it to that of EMS' */
 	var userLatLon = MAP.instances[0].formatLatLon(position);
 	/* grab the location in px */
