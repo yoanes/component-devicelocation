@@ -51,9 +51,9 @@ var DeviceLocation = new Class({
 		}
 		
 		if($defined(autoLocateOptions)) {
-			this._parseLocation_autolocate = locateOptions.onlocate;
-			this._parseError_autolocate = locateOptions.onerror;
-			this._preLocating_autolocate = locateOptions.onprelocate;
+			this._parseLocation_autolocate = autoLocateOptions.onlocate;
+			this._parseError_autolocate = autoLocateOptions.onerror;
+			this._preLocating_autolocate = autoLocateOptions.onprelocate;
 		}
 		
 		if($defined(options)) {
@@ -131,7 +131,7 @@ var DeviceLocation = new Class({
 	
 	/** the below are assumed not to be used at this stage. Usefull for 'followMe' kind of functionality **/
 	autoLocate: function(){
-		this.locationId = navigator.geolocation.watchPosition(this.parseLocation_autolocate.bind(this), this.parseError_autolocate.bind(this), {'maximumAge': this._maximumAge, 'timeout': this_timout, 'enableHighAccuracy': this._enableHighAccuracy});
+		this.locationId = navigator.geolocation.watchPosition(this.parseLocation_autolocate.bind(this), this.parseError_autolocate.bind(this), {'maximumAge': this._maximumAge, 'timeout': this._timout, 'enableHighAccuracy': this._enableHighAccuracy});
 	},
 	
 	stop: function() {
