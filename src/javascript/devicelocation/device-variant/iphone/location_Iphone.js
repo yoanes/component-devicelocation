@@ -59,7 +59,7 @@ var DeviceLocation = new Class({
 		if($defined(options)) {
 			if($defined(options.timeout)) this._timeout = options.timeout;
 			if($defined(options.maximumAge)) this._maximumAge = options.maximumAge;
-			if($defined(options.enableHighAccuracy)) this._maximumAge = options.enableHighAccuracy;
+			if($defined(options.enableHighAccuracy)) this._enableHighAccuracy = options.enableHighAccuracy;
 		}
 		
 		/* add to the global component instances */
@@ -131,7 +131,7 @@ var DeviceLocation = new Class({
 	
 	/** the below are assumed not to be used at this stage. Usefull for 'followMe' kind of functionality **/
 	autoLocate: function(){
-		this.locationId = navigator.geolocation.watchPosition(this.parseLocation_autolocate.bind(this), this.parseError_autolocate.bind(this), {'maximumAge': this._maximumAge, 'timeout': this._timout, 'enableHighAccuracy': this._enableHighAccuracy});
+		this.locationId = navigator.geolocation.watchPosition(this.parseLocation_autolocate.bind(this), this.parseError_autolocate.bind(this), {'maximumAge': this._maximumAge, 'timeout': this._timeout, 'enableHighAccuracy': this._enableHighAccuracy});
 	},
 	
 	stop: function() {
