@@ -63,6 +63,6 @@ _DEVICELOCATION_WM_.AutoLocate.onerror = null;
 _DEVICELOCATION_WM_.AutoLocate.onprelocate= null;
 
 _DEVICELOCATION_WM_.options = {};
-_DEVICELOCATION_WM_.options.timeout = 5000;
+_DEVICELOCATION_WM_.options.timeout = 10000;
 _DEVICELOCATION_WM_.options.maximumAge = 0;
 _DEVICELOCATION_WM_.options.enableHighAccuracy = true;
