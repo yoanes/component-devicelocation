@@ -1,7 +1,8 @@
 package au.com.sensis.mobile.web.component.devicelocation.device;
 
 import au.com.sensis.mobile.web.component.core.device.AbstractDeviceConfigRegistry;
-import au.com.sensis.mobile.web.component.devicelocation.device.generated.DeviceConfigType;
+import au.com.sensis.mobile.web.component.core.device.generated.AbstractDeviceConfig;
+import au.com.sensis.mobile.web.component.devicelocation.device.generated.DeviceConfig;
 import au.com.sensis.wireless.common.utils.jaxb.XMLBinder;
 
 /**
@@ -9,11 +10,19 @@ import au.com.sensis.wireless.common.utils.jaxb.XMLBinder;
  *
  * @author Boyd Sharrock
  */
-public class DeviceLocationDeviceConfigRegistry extends AbstractDeviceConfigRegistry<DeviceConfigType> {
+public class DeviceLocationDeviceConfigRegistry extends AbstractDeviceConfigRegistry {
 
-    public DeviceLocationDeviceConfigRegistry(final String deviceConfigClasspath, final XMLBinder xmlBinder,
-            final DeviceConfigType defaultDeviceConfig) {
-        super(deviceConfigClasspath, xmlBinder, defaultDeviceConfig);
+    public DeviceLocationDeviceConfigRegistry(final String deviceConfigClasspath,
+            final XMLBinder xmlBinder) {
+        super(deviceConfigClasspath, xmlBinder);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Class<? extends AbstractDeviceConfig> getDeviceConfigType() {
+        return DeviceConfig.class;
     }
 
 

@@ -20,7 +20,7 @@
   <settings defaultResolver="chain-resolver"/>
   <caches defaultCacheDir="${ivy.cache.dir}">
     <!-- Cache to use for the filesystem resolver.-->
-    <cache name="fs-cache" basedir="${ivy.local.desk.repository.cache.dir}" useOrigin="true"/>
+    <cache name="fs-cache" basedir="${ivy.local.desk.repository.dir}" useOrigin="true"/>
   </caches>
   <resolvers>
 

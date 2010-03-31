@@ -138,7 +138,7 @@
         <!--
           - Dependencies on components.
           -->
-        <dependency org="com.sensis" name="wl-core-component" rev="1.0.17" conf="default,test"/>
+        <dependency org="com.sensis" name="wl-core-component" rev="1.0.24" conf="default,test"/>
         <dependency org="com.sensis" name="wl-webapp-testbed" rev="1.0.6" conf="showcase->default"/>
         <dependency org="com.sensis" name="wl-map-component" rev="1.1.4-002" conf="showcase->default"/>
                 

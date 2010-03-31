@@ -51,9 +51,9 @@ var LocationUtilities = new Class({
 		}
 		
 		if($defined(autoLocateOptions)) {
-			this._parseLocation_autolocate = locateOptions.onlocate;
-			this._parseError_autolocate = locateOptions.onerror;
-			this._preLocating_autolocate = locateOptions.onprelocate;
+			this._parseLocation_autolocate = autoLocateOptions.onlocate;
+			this._parseError_autolocate = autoLocateOptions.onerror;
+			this._preLocating_autolocate = autoLocateOptions.onprelocate;
 		}
 		
 		if($defined(options)) {

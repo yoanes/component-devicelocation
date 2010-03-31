@@ -7,14 +7,39 @@
         
     <!-- 
       - Component specific device related configuration.
-      -->
-      
-    <deviceConfig xsi:type="devicelocation:DeviceConfigType">
+      -->    
+    
+    <identifiedDeviceConfig>
         <deviceId>Apple</deviceId>
-        <deviceLocationAware>true</deviceLocationAware>
-    </deviceConfig>
-    <deviceConfig xsi:type="devicelocation:DeviceConfigType">
+        <deviceConfig xsi:type="devicelocation:DeviceConfig">
+            <deviceLocationAware>true</deviceLocationAware>
+        </deviceConfig>
+        
+        <userAgentDeviceConfig>
+            <useragentRegex>.*Version/[012]\..*</useragentRegex>
+            <deviceConfig xsi:type="devicelocation:DeviceConfig">
+                <deviceLocationAware>false</deviceLocationAware>
+            </deviceConfig>
+        </userAgentDeviceConfig>
+    </identifiedDeviceConfig>
+    
+    <identifiedDeviceConfig>
         <deviceId>Android-OS</deviceId>
-        <deviceLocationAware>true</deviceLocationAware>
-    </deviceConfig>   
+        <deviceConfig xsi:type="devicelocation:DeviceConfig">
+            <deviceLocationAware>true</deviceLocationAware>
+        </deviceConfig>
+        
+        <userAgentDeviceConfig>
+            <useragentRegex>.*Android 1.*</useragentRegex>
+            <deviceConfig xsi:type="devicelocation:DeviceConfig">
+                <deviceLocationAware>false</deviceLocationAware>
+            </deviceConfig>
+        </userAgentDeviceConfig>
+        
+    </identifiedDeviceConfig>  
+    
+    <defaultDeviceConfig xsi:type="devicelocation:DeviceConfig">
+        <deviceLocationAware>false</deviceLocationAware>
+    </defaultDeviceConfig>
+    
 </core:deviceConfigs>

@@ -27,12 +27,6 @@
                 <property name="validationEnabled" value="true"/>
             </bean>
         </constructor-arg>
-        <constructor-arg index="2">
-            <bean class="au.com.sensis.mobile.web.component.devicelocation.device.generated.DeviceConfigType">
-                <property name="deviceId" value="DefaultDevice"/>
-                <property name="deviceLocationAware" value="false"/>
-            </bean>
-        </constructor-arg>
     </bean>
     
 </beans>
