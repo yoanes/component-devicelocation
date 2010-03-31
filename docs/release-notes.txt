@@ -6,3 +6,7 @@ Initial Release.
 
 * Add a devicelocation:setup tag for the client sites to use.
 * Ensure component only targets Android & iPhone.
+
+==== Version 1.0.1-005 (tag: devicelocation_v1_0_1_005) ====
+
+* Ensure component can target Android 2.0 and greater, iPhone 3.0 and greater.
