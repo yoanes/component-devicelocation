@@ -33,7 +33,7 @@ _DEVICELOCATION_WM_.AutoLocate.onlocate = function(position) {
 			var address = addresses.results[0]; 
 			var displayAddress = "";
 			displayAddress += address.streetNumber + " " + address.street.fullName.toLowerCase() + ", " + address.suburb.toLowerCase() + ", " + address.state;
-			$('currentAddress').innerHTML = displayAddress;
+			$('currentAddress').innerHTML = displayAddress + ' (' + position.accuracy + 'm)';
 			
 			if(_DEVICELOCATION_WM_.marker != null)
 				MAP.instances[0].Map.markersLayer.removeMarker(_DEVICELOCATION_WM_.marker);
@@ -56,7 +56,7 @@ _DEVICELOCATION_WM_.AutoLocate.onlocate = function(position) {
 		}
 	});
 	
-	Reporting.to('http://'+window.location.host+'/?dlat='+position.latitude+'&dlon='+position.longitude+'&dprox='+position.accuracy);
+	Reporting.to('http://'+window.location.host+'/?dlat='+position.latitude+'&dlon='+position.longitude+'&prox='+position.accuracy);
 };
 
 _DEVICELOCATION_WM_.AutoLocate.onerror = null;
