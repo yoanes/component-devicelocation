@@ -10,3 +10,11 @@ Initial Release.
 ==== Version 1.0.1-005 (tag: devicelocation_v1_0_1_005) ====
 
 * Ensure component can target Android 2.0 and greater, iPhone 3.0 and greater.
+
+==== Version 1.0.1-006 (tag: devicelocation_v1_0_1_006) ====
+
+* Increased the flexibility of the auto locate functionality.
+- Now supports max proximity / goal proximity / max tries.
+- Auto Locate will now supports calling a final "done" function when it stops.
+- Made the locate & autoLocate options separately configurable.
+- Updated to latest core & build scripts so that the component js includes a version in the filename.

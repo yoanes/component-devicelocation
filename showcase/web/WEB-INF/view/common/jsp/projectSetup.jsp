@@ -10,54 +10,27 @@
 <mcs:script type="text/javascript">
 
 	/* define some global var within the namespace */
-	_DEVICELOCATION_WM_.stop = false;
-	_DEVICELOCATION_WM_.position = null;
-	_DEVICELOCATION_WM_.loop = null;
-	_DEVICELOCATION_WM_.accuracy = null;
+	_DEVICELOCATION_WM_.timeout = null;
 	
 	/* the method to run the interval */
-	_DEVICELOCATION_WM_.keepLocating = function(timeout, recency, proximity) {
-		/* do initialization */
-		if(DEVICELOCATION.instances.length == 0) {
-			new DeviceLocation({'onlocate': function(position) {
-				if(_DEVICELOCATION_WM_.position == null) {
-					_DEVICELOCATION_WM_.position = position;
-					_DEVICELOCATION_WM_.accuracy = position.accuracy;
-					
-					if(DEVICELOCATION.instances[0].pointWithinRadius(proximity))
-						_DEVICELOCATION_WM_.stop = true;
-				}
-				else if((position.accuracy != null) && 
-						(position.accuracy < _DEVICELOCATION_WM_.accuracy)) {
-					_DEVICELOCATION_WM_.position = position;
-					_DEVICELOCATION_WM_.accuracy = position.accuracy
-					
-					if(DEVICELOCATION.instances[0].pointWithinRadius(proximity))
-						_DEVICELOCATION_WM_.stop = true;
-				}
-			}.bind(this)}, null, null);
-		}
-		
+	_DEVICELOCATION_WM_.keepLocating = function(timeout) {
 		/* set the timeout as specified */
-		setTimeout(function() { _DEVICELOCATION_WM_.stop = true; }, timeout);
+		_DEVICELOCATION_WM_.timeout = setTimeout(function() { 
+			DEVICELOCATION.instances[0].stop();
+		}, timeout);
 		
-		/* locate while flag is off
-		 * and locate every 2 second
-		 */
-		_DEVICELOCATION_WM_.loop = setInterval(function() { 
-			DEVICELOCATION.instances[0].locate(); 
-			if(_DEVICELOCATION_WM_.stop) {
-				clearInterval(_DEVICELOCATION_WM_.loop);
-				_DEVICELOCATION_WM_.processLocation(_DEVICELOCATION_WM_.position);
-			}
-		}, 2000);
+		DEVICELOCATION.instances[0].autoLocate();
 	};
 	
 	window.addEvent('load', function() { 
-		$('locateMeButton').addEventListener('click', function(e) {
-			_DEVICELOCATION_WM_.keepLocating(10000, 0, 5);
+		
+		new DeviceLocation(null, null, null);
+		
+		$('locateMeButton').addEvent('click', function(e) {
+			
+			_DEVICELOCATION_WM_.keepLocating(30000);
 			return false;
-		}, false);
+		});
 	});
 	
 </mcs:script>
