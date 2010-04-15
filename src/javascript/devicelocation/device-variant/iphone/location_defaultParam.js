@@ -2,8 +2,9 @@ _DEVICELOCATION_WM_ = {};
 
 _DEVICELOCATION_WM_.Locate = {};
 _DEVICELOCATION_WM_.Locate.onlocate = null;
+_DEVICELOCATION_WM_.Locate.prelocate= null;
+_DEVICELOCATION_WM_.Locate.postlocate= null;
 _DEVICELOCATION_WM_.Locate.onerror = null;
-_DEVICELOCATION_WM_.Locate.onprelocate= null;
 
 _DEVICELOCATION_WM_.marker = null;
 
@@ -33,13 +34,16 @@ _DEVICELOCATION_WM_.AutoLocate.onlocate = function(position) {
 			var address = addresses.results[0]; 
 			var displayAddress = "";
 			displayAddress += address.streetNumber + " " + address.street.fullName.toLowerCase() + ", " + address.suburb.toLowerCase() + ", " + address.state;
-			$('currentAddress').innerHTML = displayAddress + ' (' + position.accuracy + 'm)';
+			if($('approximatePlaceName')) 
+				$('approximatePlaceName').innerHTML = 'Current Location';
+			$('currentAddress').innerHTML = displayAddress + ' &#177; ' + Math.ceil(position.accuracy) + 'm';
 			
 			if(_DEVICELOCATION_WM_.marker != null)
 				MAP.instances[0].Map.markersLayer.removeMarker(_DEVICELOCATION_WM_.marker);
+			else MAP.instances[0].clearPois();
 			
-			var locateMeIcon =  [{url: '/imageserver/common/images/component/map/markers/standard/dot_23x27.png',
-						  width: 23 , height: 27 , offsetX: -8 , offsetY: -27 , 
+			var locateMeIcon =  [{url: '/imageserver/common/images/component/map/markers/standard/icon_emscell_28x28.png',
+						  width: 28 , height: 28 , offsetX: -14 , offsetY: -14, 
 						  coordinates: { latitude: position.latitude , longitude: position.longitude }
 						}];
 			
@@ -59,10 +63,12 @@ _DEVICELOCATION_WM_.AutoLocate.onlocate = function(position) {
 	Reporting.to('http://'+window.location.host+'/?dlat='+position.latitude+'&dlon='+position.longitude+'&prox='+position.accuracy);
 };
 
+_DEVICELOCATION_WM_.AutoLocate.prelocate = null;
+_DEVICELOCATION_WM_.AutoLocate.postlocate = null;
 _DEVICELOCATION_WM_.AutoLocate.onerror = null;
-_DEVICELOCATION_WM_.AutoLocate.onprelocate= null;
 
-_DEVICELOCATION_WM_.options = {};
-_DEVICELOCATION_WM_.options.timeout = 30000;
-_DEVICELOCATION_WM_.options.maximumAge = 0;
-_DEVICELOCATION_WM_.options.enableHighAccuracy = true;
+_DEVICELOCATION_WM_.AutoLocate.limits = {};
+_DEVICELOCATION_WM_.AutoLocate.limits.tries = 10;
+_DEVICELOCATION_WM_.AutoLocate.limits.proximity = 50;
+_DEVICELOCATION_WM_.AutoLocate.limits.timeout = 30000;
+_DEVICELOCATION_WM_.AutoLocate.limits.acceptableProximity = 1000;
