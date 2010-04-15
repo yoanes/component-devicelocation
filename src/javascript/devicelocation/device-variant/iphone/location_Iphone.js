@@ -3,68 +3,40 @@ DEVICELOCATION.instances = new Array();
 
 var DeviceLocation = new Class({
 	
-	/*** locate() specific parser ***/
-	/* functions to be executed on success and failure respectively */
-	_parseLocation_locate: null,
-	_parseError_locate: null,
+	/** locate parameters **/
+	locate_preLocate: null,
+	locate_onLocate: null,
+	locate_postLocate: null,
+	locate_onError: null,
 	
-	/* functions to be executed before any location request is fired off */
-	_preLocating_locate: null,
+	locate_options_timeout: 5000,
+	locate_options_maximumAge: 0,
+	locate_options_enableHighAccuracy: false,
 	
-	/* Timeout before we stop trying and give back the error. Default 5 seconds. */
-	_locateTimeout: 5000,
+	locate_lastRecordedPosition: null,
 	
-	/* How long should the position be cached. Default 5 minutes. */
-	_locateMaximumAge: 300000,
+	/** autolocate parameters **/
+	autoLocate_preLocate: null,
+	autoLocate_onLocate: null,
+	autoLocate_postLocate: null,
+	autoLocate_onError: null,
 	
-	/* Should we enable the high accuracy locating (GPS). Default false.*/
-	_locateEnableHighAccuracy: false,
+	_autoLocate_locationId: null,
+	_autoLocate_timeoutId: null,
+	_autoLocate_try_counter: 0,
 	
-	/*** --- ***/
+	autoLocate_options_timeout: 5000,
+	autoLocate_options_maximumAge: 0,
+	autoLocate_options_enableHighAccuracy: true,
 	
-	/* Provides the id of the system watchPosition operation. */
-	_autoLocateLocationId: null,
+	autoLocate_limits_tries: null,
+	autoLocate_limits_proximity: null,
+	autoLocate_limits_timeout: null,
+	autoLocate_limits_acceptableProximity: null,
 	
-	/* Functions to be executed on success. */
-	_parseLocation_autolocate: null,
-	/* Functions to be executed and failure respectively. */
-	_parseError_autolocate: null,
-	
-	/* Functions to be executed before any location request is fired off */
-	_preLocating_autolocate: null,
-
-	_autolocate_done: null, 
-	/*** --- ***/
-	
-	/* Timeout before we stop trying and give back the error. Default 30 seconds. */
-	_autoLocateTimeout: 30000,
-	
-	/* How long should the position be cached. Default 0 seconds (never). */
-	_autoLocateMaximumAge: 0,
-
-	/* How many responses should we get before we stop. Default 10 responses. */
-	_autoLocateMaximumTries: 10, 
-
-	/* How many responses have we had. Starts at zero. */
-	_autoLocateTriesCounter: 0, 
-	
-	/* What is the maximum proximity which is good enough to use. */
-	_autoLocateMaximumProximity: 1000, 
-	
-	/* What is the goal proximity - we can stop locating its that good! */
-	_autoLocateGoalProximity: 50,
-	
-	/* Should we enable the high accuracy locating (GPS). Default true. */
-	_autoLocateEnableHighAccuracy: true,
-	
-	/* A flag using during the auto locate processing - it means we can stop the current locate process. */
-	_autoLocateStopMeNow: false,
-	
-	/*** --- ***/
+	autoLocate_lastRecordedPosition: null,
 	
 	nth: null,
-	
-	lastRecordedPosition: null,
 	
 	/* options will take the following 
 	 * proximity: in meters, what's the acceptable radius
@@ -72,61 +44,64 @@ var DeviceLocation = new Class({
 	 * recency: in ms, how long do you want your location to be cache
 	 * 
 	 */
-	initialize: function(locateOptions, autoLocateOptions, options) {
-		if($defined(locateOptions)) {
-			this._parseLocation_locate = locateOptions.onlocate;
-			this._parseError_locate = locateOptions.onerror;
-			this._preLocating_locate = locateOptions.onprelocate;
+	initialize: function(locateObj, autoLocateObj) {
+		if($defined(locateObj)) {
+			this.locate_preLocate = locateObj.prelocate;
+			this.locate_onLocate = locateObj.onlocate;
+			this.locate_postLocate = locateObj.postlocate;
+			this.locate_onError = locateObj.onerror;
+			
+			if($defined(locateObj.options)) {
+				this.locate_options_timeout = locateObj.options.timeout;
+				this.locate_options_maximumAge = locateObj.options.maximumAge;
+				this.locate_options_enableHighAccuracy = locateObj.options.enableHighAccuracy;
+			}
 		}
 		
-		if($defined(autoLocateOptions)) {
-			this._parseLocation_autolocate = autoLocateOptions.onlocate;
-			this._parseError_autolocate = autoLocateOptions.onerror;
-			this._preLocating_autolocate = autoLocateOptions.onprelocate;
-		}
-		
-		if($defined(options)) {
-
-			if($defined(options.locateTimeout)) this._locateTimeout = options.locateTimeout;
-			if($defined(options.locateMaximumAge)) this._locateMaximumAge = options.locateMaximumAge;
-			if($defined(options.locateEnableHighAccuracy)) this._locateEnableHighAccuracy = options.locateEnableHighAccuracy;
+		if($defined(autoLocateObj)) {
+			this.autoLocate_preLocate = autoLocateObj.prelocate;
+			this.autoLocate_onLocate = autoLocateObj.onlocate;
+			this.autoLocate_postLocate = autoLocateObj.postlocate;
+			this.autoLocate_onError = autoLocateObj.onerror;
 			
-			if($defined(options.autoLocateTimeout)) this._autoLocateTimeout = options.autoLocateTimeout;
-			if($defined(options.autoLocateMaximumAge)) this._autoLocateMaximumAge = options.autoLocateMaximumAge;
-			if($defined(options.autoLocateMaximumTries)) this._autoLocateMaximumTries = options.autoLocateMaximumTries;
-			if($defined(options.autoLocateMaximumProximity)) this._autoLocateMaximumProximity = options.autoLocateMaximumProximity;
-			if($defined(options.autoLocateGoalProximity)) this._autoLocateGoalProximity = options.autoLocateGoalProximity;
-			if($defined(options.autoLocateEnableHighAccuracy)) this._autoLocateEnableHighAccuracy = options.autoLocateEnableHighAccuracy;
+			if($defined(autoLocateObj.options)) {
+				this.autoLocate_options_timeout = autoLocateObj.options.timeout;
+				this.autoLocate_options_maximumAge = autoLocateObj.options.maximumAge;
+				this.autoLocate_options_enableHighAccuracy = autoLocateObj.options.enableHighAccuracy;
+			}
 			
+			if($defined(autoLocateObj.limits)) {
+				this.autoLocate_limits_tries = autoLocateObj.limits.tries;
+				this.autoLocate_limits_proximity = autoLocateObj.limits.proximity;
+				this.autoLocate_limits_timeout = autoLocateObj.limits.timeout;
+				this.autoLocate_limits_acceptableProximity = autoLocateObj.limits.acceptableProximity;
+			}
 		}
 		
 		/* add to the global component instances */
 		this.nth = DEVICELOCATION.instances.push(this) - 1;
 	},
 	
-	_parseLocation_basic: function(position) {
+	/* default method for onLocate */
+	default_onLocate: function(position) {
 		try {
-			sensis.log("Location: (" + position.coords.latitude + " " + position.coords.longitude + "), " + position.coords.accuracy + ", " + position.timestamp);
+			sensis.extract(position.coords);
+			
+			sensis.log('-- Locate properties --');
+			sensis.log('Best recorded position:' + this.locate_lastRecordedPosition);
+			sensis.log('-- END Locate properties --');
+			
+			sensis.log('-- AutoLocate properties --');
+			sensis.log('Try ' + this._autoLocate_try_counter + ' of ' + this.autoLocate_limits_tries);
+			sensis.log('Accuracy: ' + this.autoLocate_lastRecordedPosition.coords.accuracy + ' of ' + this.autoLocate_limits_proximity);
+			sensis.log('Best recorded position:' + this.autoLocate_lastRecordedPosition);
+			sensis.log('-- END AutoLocate properties --');
 		}
 		catch(exception) {}
 	},
 	
-	_autolocate_done_default: function(position) {
-		try {
-			
-			if (position != null) {
-				
-				sensis.log("Best Location: (" + position.coords.latitude + " " + position.coords.longitude + "), " + position.coords.accuracy + ", " + position.timestamp);
-				
-			} else { 
-			
-				sensis.log("No Location !!!");
-			}
-		}
-		catch(exception) {}
-	},
-	
-	_parseError_basic: function(error) {
+	/* default method for onError */
+	default_onError: function(error) {
 		try {
 			switch(error.code) {
 				case error.PERMISSION_DENIED:
@@ -137,32 +112,49 @@ var DeviceLocation = new Class({
 					sensis.warn("Location Error: Position unavailable.");
 					break;
 				
+				case error.TIMEOUT:
+					sensis.warn("Location Error: Timeout.");
+					break;
+					
 				default:
 					sensis.warn("Location Error: Unknown");
 			}
 		}
 		catch(exception) {}
-	},
-	
-	parseLocation_locate: function(position){
-		this.lastRecordedPosition = position;
-		if($defined(this._parseLocation_locate) && this._parseLocation_locate instanceof Function) {
-			this._parseLocation_locate(position.coords, position.timestamp);
-		}
-		else this._parseLocation_basic(position);
-	},
-	
-	parseError_locate: function(error) {
-		if($defined(this._parseError_locate) && this._parseError_locate instanceof Function) 
-			this._parseError_locate(error);
-		else this._parseError_basic(error);
-	},
-	
-	parseLocation_autolocate: function(position){
-				
-		this._autoLocateTriesCounter = this._autoLocateTriesCounter + 1;
 		
-		sensis.log("Tries is " + this._autoLocateTriesCounter);
+		/* stop any further process if exist */
+		this.stop();
+	},
+	
+	locate_parseLocation: function(position) {
+		this.locate_lastRecordedPosition = position;
+		
+		if($defined(this.locate_onLocate) && this.locate_onLocate instanceof Function)
+			this.locate_onLocate(position.coords, position.timestamp);
+		else this.default_onLocate(position);
+		
+		if($defined(this.locate_postLocate) && this.locate_postLocate instanceof Function) {
+			this.locate_postLocate();
+		}
+	},
+
+	locate_parseError: function(error) {
+		if($defined(this.locate_onError) && this.locate_onError instanceof Function) 
+			this.locate_onError(error);
+		else this.default_onError(error);
+	},
+	
+	autoLocate_parseLocation: function(position) {
+		if(position == null) return;
+		
+		/* always consider the first position returned regardless */
+		if(this.autoLocate_lastRecordedPosition == null) {
+			this.autoLocate_lastRecordedPosition = position;
+			
+			if($defined(this.autoLocate_onLocate) && this.autoLocate_onLocate instanceof Function)			
+				this.autoLocate_onLocate(position.coords, position.timestamp);
+			else this.default_onLocate(position);
+		}
 		
 		/*
 		 * Monster Logic...
@@ -171,77 +163,97 @@ var DeviceLocation = new Class({
 		 * Also, we have had some edge cases where the reported accuracy is the 
 		 * same (500m) - but the position is actually better.
 		 */
-		if ((position != null) &&
-		    (position.coords.accuracy < this._autoLocateMaximumProximity) &&
-		    ((this.lastRecordedPosition == null) ||
-	         (position.coords.accuracy < this.lastRecordedPosition.coords.accuracy) ||
-	         ((position.coords.accuracy == this.lastRecordedPosition.coords.accuracy) &&
-	          ((position.coords.latitude != this.lastRecordedPosition.coords.latitude) ||
-	           (position.coords.longitude != this.lastRecordedPosition.coords.longitude))))) {
-
-			this.lastRecordedPosition = position;
+		else if((position.coords.accuracy < this.autoLocate_lastRecordedPosition.coords.accuracy) ||
+				((position.coords.accuracy == this.autoLocate_lastRecordedPosition.coords.accuracy) &&
+				 ((position.coords.latitude != this.autoLocate_lastRecordedPosition.coords.latitude) ||
+				  (position.coords.longitude != this.autoLocate_lastRecordedPosition.coords.longitude)))) {
 			
-			sensis.log("Accuracy is " + this.lastRecordedPosition.coords.accuracy + "m");
-		
-			if($defined(this._parseLocation_autolocate) && this._parseLocation_autolocate instanceof Function) {
-				 				
-				this._parseLocation_autolocate(position.coords, position.timestamp, position.accuracy);
-				
-			} else { 
-				this._parseLocation_basic(position);
+			/* if an acceptableProximity limit is set */
+			if($defined(this.autoLocate_limits_acceptableProximity) && (this.autoLocate_limits_acceptableProximity > 0)) {
+				/* then only consider the positions with better accuracy then the set limit */
+				if(position.coords.accuracy < this.autoLocate_limits_acceptableProximity) {
+					this.autoLocate_lastRecordedPosition = position;
+					
+					if($defined(this.autoLocate_onLocate) && this.autoLocate_onLocate instanceof Function)			
+						this.autoLocate_onLocate(position.coords, position.timestamp);
+					else this.default_onLocate(position);
+				}
+			}
+			
+			/* otherwise proceed as normal */
+			else {
+				this.autoLocate_lastRecordedPosition = position;
+			
+				if($defined(this.autoLocate_onLocate) && this.autoLocate_onLocate instanceof Function)			
+					this.autoLocate_onLocate(position.coords, position.timestamp);
+				else this.default_onLocate(position);
 			}
 		}
 		
-		if (this._autoLocateTriesCounter >= this._autoLocateMaximumTries) { 
-		
-			sensis.log("Maximum Tries Reached");
-			this._autoLocateStopMeNow = true;
+		/* check if the number of tries has hit the specified limit */
+		if($defined(this.autoLocate_limits_tries) && (this.autoLocate_limits_tries > 0)) {
+			this._autoLocate_try_counter++;
+			if(this._autoLocate_try_counter >= this.autoLocate_limits_tries)
+				this.stop();
 		}
 		
-		if ((this.lastRecordedPosition != null) && 
-			(this.lastRecordedPosition.coords.accuracy < this._autoLocateGoalProximity)) { 
-		
-			sensis.log("Goal Proximity Reached");
-			this._autoLocateStopMeNow = true;
-		}
-		
-		if (this._autoLocateStopMeNow) { 
-		
-			this.stop();
-			
-			if($defined(this._autolocate_done) && this._autolocate_done instanceof Function) {				
-				this._autolocate_done();
-				
-			} else {				
-				this._autolocate_done_default(this.lastRecordedPosition);
-			}	
+		/* check if the recorded position has hit the desired proximity (if set) */
+		if($defined(this.autoLocate_limits_proximity) && (this.autoLocate_limits_proximity > 0)) {
+			if(this.autoLocate_lastRecordedPosition < this.autoLocate_limits_proximity)
+				this.stop();
 		}
 	},
 	
-	parseError_autolocate: function(error) {
-		if($defined(this._parseError_autolocate) && this._parseError_autolocate instanceof Function) 
-			this._parseError_autolocate(error);
-		else this._parseError_basic(error);
+	autoLocate_parseError: function(error) {
+		if($defined(this.autoLocate_onError) && this.autoLocate_onError instanceof Function) 
+			this.autoLocate_onError(error);
+		else this.default_onError(error);
 	},
 	
-	pointWithinRadius: function(radius) {
-		if(this.lastRecordedPosition.coords.accuracy <= radius) return true;
-		else return false;
-	},
-
 	/** A locate me once function */
 	locate: function() {
-		navigator.geolocation.getCurrentPosition(this.parseLocation_locate.bind(this), this.parseError_locate.bind(this), {'maximumAge': this._locateMaximumAge, 'timeout': this._locateTimeout, 'enableHighAccuracy': this._locateEnableHighAccuracy});
+		if($defined(this.locate_preLocate) && this.locate_preLocate instanceof Function)
+			this.locate_preLocate();
+		
+		navigator.geolocation.getCurrentPosition(this.locate_parseLocation.bind(this), this.locate_parseError.bind(this), 
+				{'maximumAge': this.locate_options_maximumAge, 
+				 'timeout': this.locate_options_timeout,
+				 'enableHighAccuracy': this.locate_options_enableHighAccuracy}
+		);
 	},
 	
 	/** Triggers the follow me style of locating.  Location call backs will be received until you call stop. */
 	autoLocate: function(){
-		this._autoLocateTriesCounter = 0;
-		this._autoLocateStopMeNow = false;
-		this._autoLocateLocationId = navigator.geolocation.watchPosition(this.parseLocation_autolocate.bind(this), this.parseError_autolocate.bind(this), {'maximumAge': this._autoLocateMaximumAge, 'timeout': this._autoLocateTimeout, 'enableHighAccuracy': this._autoLocateEnableHighAccuracy});
+		if($defined(this.autoLocate_preLocate) && this.autoLocate_preLocate instanceof Function)
+			this.autoLocate_preLocate();
+		
+		this._autoLocate_locationId = navigator.geolocation.watchPosition(this.autoLocate_parseLocation.bind(this), this.autoLocate_parseError.bind(this),
+				{'maximumAge': this.autoLocate_options_maximumAge, 
+			 	 'timeout': this.autoLocate_options_timeout, 
+			 	 'enableHighAccuracy': this.autoLocate_options_enableHighAccuracy}
+			);
+		
+		if($defined(this.autoLocate_limits_timeout)) 
+			this._autoLocate_timeoutId = setTimeout(function() {this.stop();}.bind(this), this.autoLocate_limits_timeout);
 	},
 	
 	stop: function() {
-		navigator.geolocation.clearWatch(this._autoLocateLocationId);
+		navigator.geolocation.clearWatch(this._autoLocate_locationId);
+		clearTimeout(this._autoLocate_timeoutId);
+		if($defined(this.autoLocate_postLocate) && this.autoLocate_postLocate instanceof Function)
+			this.autoLocate_postLocate();
+		else this.default_onLocate(this.autoLocate_lastRecordedPosition);
+
+		this.reset();
+	},
+	
+	reset: function() {
+		/* reinitiate */
+		this._autoLocate_locationId = null;
+		this._autoLocate_timeoutId = null;
+		this._autoLocate_try_counter = 0;
+		
+		/* reset the previous result at the end */ 
+		this.autoLocate_lastRecordedPosition = null;
 	}
 });
