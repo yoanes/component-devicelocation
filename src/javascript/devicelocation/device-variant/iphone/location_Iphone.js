@@ -194,13 +194,13 @@ var DeviceLocation = new Class({
 		if($defined(this.autoLocate_limits_tries) && (this.autoLocate_limits_tries > 0)) {
 			this._autoLocate_try_counter++;
 			if(this._autoLocate_try_counter >= this.autoLocate_limits_tries)
-				this.stop();
+				this.stop(); return;
 		}
 		
 		/* check if the recorded position has hit the desired proximity (if set) */
 		if($defined(this.autoLocate_limits_proximity) && (this.autoLocate_limits_proximity > 0)) {
 			if(this.autoLocate_lastRecordedPosition < this.autoLocate_limits_proximity)
-				this.stop();
+				this.stop(); return;
 		}
 	},
 	
@@ -242,7 +242,6 @@ var DeviceLocation = new Class({
 		clearTimeout(this._autoLocate_timeoutId);
 		if($defined(this.autoLocate_postLocate) && this.autoLocate_postLocate instanceof Function)
 			this.autoLocate_postLocate();
-		else this.default_onLocate(this.autoLocate_lastRecordedPosition);
 
 		this.reset();
 	},
