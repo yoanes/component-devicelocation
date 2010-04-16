@@ -25,7 +25,7 @@ var DeviceLocation = new Class({
 	_autoLocate_timeoutId: null,
 	_autoLocate_try_counter: 0,
 	
-	autoLocate_options_timeout: 5000,
+	autoLocate_options_timeout: 10000,
 	autoLocate_options_maximumAge: 0,
 	autoLocate_options_enableHighAccuracy: true,
 	
