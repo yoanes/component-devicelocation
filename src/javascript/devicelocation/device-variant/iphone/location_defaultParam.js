@@ -64,8 +64,14 @@ _DEVICELOCATION_WM_.AutoLocate.onlocate = function(position) {
 };
 
 _DEVICELOCATION_WM_.AutoLocate.prelocate = null;
-_DEVICELOCATION_WM_.AutoLocate.postlocate = null;
-_DEVICELOCATION_WM_.AutoLocate.onerror = null;
+
+_DEVICELOCATION_WM_.AutoLocate.postlocate = function() { 
+	$('locateMeButton').src = _DEVICELOCATION_WM_.hold; 
+};
+
+_DEVICELOCATION_WM_.AutoLocate.onerror = function() { 
+	$('locateMeButton').src = _DEVICELOCATION_WM_.hold; 
+};
 
 _DEVICELOCATION_WM_.AutoLocate.limits = {};
 _DEVICELOCATION_WM_.AutoLocate.limits.tries = 10;
