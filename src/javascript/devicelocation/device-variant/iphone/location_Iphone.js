@@ -29,9 +29,13 @@ var DeviceLocation = new Class({
 	autoLocate_options_maximumAge: 0,
 	autoLocate_options_enableHighAccuracy: true,
 	
+	/* if set, the autoLocate will stop after the specified number of tries is reached */
 	autoLocate_limits_tries: null,
+	/* if set, the autoLocate will stop when the result's accuracy is less then the set proximity */
 	autoLocate_limits_proximity: null,
+	/* duration for the autoLocate in ms */
 	autoLocate_limits_timeout: null,
+	/* if set, the autoLocate will only consider positions with accuracy less then or equal to the acceptableProximity */
 	autoLocate_limits_acceptableProximity: null,
 	
 	autoLocate_lastRecordedPosition: null,
@@ -147,31 +151,25 @@ var DeviceLocation = new Class({
 	autoLocate_parseLocation: function(position) {
 		if(position == null) return;
 		
-		/* always consider the first position returned regardless */
-		if(this.autoLocate_lastRecordedPosition == null) {
-			this.autoLocate_lastRecordedPosition = position;
-			
-			if($defined(this.autoLocate_onLocate) && this.autoLocate_onLocate instanceof Function)			
-				this.autoLocate_onLocate(position.coords, position.timestamp);
-			else this.default_onLocate(position);
-		}
-		
 		/*
 		 * Monster Logic...
 		 * 
 		 * Basically - we want to use the position if it is better than, the one we have.
 		 * Also, we have had some edge cases where the reported accuracy is the 
 		 * same (500m) - but the position is actually better.
+		 *
+		 * We always consider the first position returned regardless
 		 */
-		else if((position.coords.accuracy < this.autoLocate_lastRecordedPosition.coords.accuracy) ||
-				((position.coords.accuracy == this.autoLocate_lastRecordedPosition.coords.accuracy) &&
-				 ((position.coords.latitude != this.autoLocate_lastRecordedPosition.coords.latitude) ||
-				  (position.coords.longitude != this.autoLocate_lastRecordedPosition.coords.longitude)))) {
+		if((this.autoLocate_lastRecordedPosition == null) ||
+		   ((position.coords.accuracy < this.autoLocate_lastRecordedPosition.coords.accuracy) ||
+			((position.coords.accuracy == this.autoLocate_lastRecordedPosition.coords.accuracy) &&
+			 ((position.coords.latitude != this.autoLocate_lastRecordedPosition.coords.latitude) ||
+			  (position.coords.longitude != this.autoLocate_lastRecordedPosition.coords.longitude))))) {
 			
 			/* if an acceptableProximity limit is set */
 			if($defined(this.autoLocate_limits_acceptableProximity) && (this.autoLocate_limits_acceptableProximity > 0)) {
-				/* then only consider the positions with better accuracy then the set limit */
-				if(position.coords.accuracy < this.autoLocate_limits_acceptableProximity) {
+				/* then only consider the positions with better or equal accuracy then the set limit */
+				if(position.coords.accuracy <= this.autoLocate_limits_acceptableProximity) {
 					this.autoLocate_lastRecordedPosition = position;
 					
 					if($defined(this.autoLocate_onLocate) && this.autoLocate_onLocate instanceof Function)			
@@ -193,14 +191,18 @@ var DeviceLocation = new Class({
 		/* check if the number of tries has hit the specified limit */
 		if($defined(this.autoLocate_limits_tries) && (this.autoLocate_limits_tries > 0)) {
 			this._autoLocate_try_counter++;
-			if(this._autoLocate_try_counter >= this.autoLocate_limits_tries)
-				this.stop(); return;
+			if(this._autoLocate_try_counter >= this.autoLocate_limits_tries) {
+				this.stop(); 
+				return;
+			}
 		}
 		
 		/* check if the recorded position has hit the desired proximity (if set) */
 		if($defined(this.autoLocate_limits_proximity) && (this.autoLocate_limits_proximity > 0)) {
-			if(this.autoLocate_lastRecordedPosition < this.autoLocate_limits_proximity)
-				this.stop(); return;
+			if(this.autoLocate_lastRecordedPosition.coords.accuracy < this.autoLocate_limits_proximity) {
+				this.stop(); 
+				return;
+			}
 		}
 	},
 	
