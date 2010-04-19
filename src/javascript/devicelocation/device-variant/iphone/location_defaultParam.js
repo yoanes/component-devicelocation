@@ -36,7 +36,7 @@ _DEVICELOCATION_WM_.AutoLocate.onlocate = function(position) {
 			displayAddress += address.streetNumber + " " + address.street.fullName.toLowerCase() + ", " + address.suburb.toLowerCase() + ", " + address.state;
 			if($('approximatePlaceName')) 
 				$('approximatePlaceName').innerHTML = 'Current Location';
-			$('currentAddress').innerHTML = displayAddress + ' &#177; ' + Math.ceil(position.accuracy) + 'm';
+			$('currentAddress').innerHTML = displayAddress + ' &#177;' + Math.ceil(position.accuracy) + 'm';
 			
 			if(_DEVICELOCATION_WM_.marker != null)
 				MAP.instances[0].Map.markersLayer.removeMarker(_DEVICELOCATION_WM_.marker);
