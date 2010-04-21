@@ -6,6 +6,8 @@ _DEVICELOCATION_WM_.Locate.prelocate= null;
 _DEVICELOCATION_WM_.Locate.postlocate= null;
 _DEVICELOCATION_WM_.Locate.onerror = null;
 
+_DEVICELOCATION_WM_.disabled = false;
+
 _DEVICELOCATION_WM_.marker = null;
 
 _DEVICELOCATION_WM_.AutoLocate = {};
@@ -69,8 +71,14 @@ _DEVICELOCATION_WM_.AutoLocate.postlocate = function() {
 	$('locateMeButton').src = _DEVICELOCATION_WM_.hold; 
 };
 
-_DEVICELOCATION_WM_.AutoLocate.onerror = function() { 
+_DEVICELOCATION_WM_.AutoLocate.onerror = function(error) { 
 	$('locateMeButton').src = _DEVICELOCATION_WM_.hold; 
+	
+	sensis.log('error.code: ' + error.code);
+	if(error.code == error.PERMISSION_DENIED) {
+		_DEVICELOCATION_WM_.disabled = true;
+		sensis.log('permission denied');
+	}
 };
 
 _DEVICELOCATION_WM_.AutoLocate.limits = {};
