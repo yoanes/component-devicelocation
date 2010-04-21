@@ -199,7 +199,7 @@ var DeviceLocation = new Class({
 		
 		/* check if the recorded position has hit the desired proximity (if set) */
 		if($defined(this.autoLocate_limits_proximity) && (this.autoLocate_limits_proximity > 0)) {
-			if(this.autoLocate_lastRecordedPosition.coords.accuracy < this.autoLocate_limits_proximity) {
+			if(position.coords.accuracy < this.autoLocate_limits_proximity) {
 				this.stop(); 
 				return;
 			}
