@@ -9,8 +9,14 @@
 <devicelocation:setup />
 <mcs:script type="text/javascript">
 	new DeviceLocation(null, {
-								postLocate: function(position) {
-									DEVICELOCATION.instances[0].default_onLocate(position);
+								postlocate: function() {
+									if(DEVICELOCATION.instances[0].autoLocate_lastRecordedPosition == null) {
+										sensis.log('no result found');
+										sensis.log('total tries: '+ DEVICELOCATION.instances[0]._autoLocate_try_counter + ' of ' + DEVICELOCATION.instances[0].autoLocate_limits_tries);
+									}
+									else {
+										DEVICELOCATION.instances[0].default_onLocate(DEVICELOCATION.instances[0].autoLocate_lastRecordedPosition);
+									}
 							  	},
 							  	limits: _DEVICELOCATION_WM_.AutoLocate.limits
 							  });
