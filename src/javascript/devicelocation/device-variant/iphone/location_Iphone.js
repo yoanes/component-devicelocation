@@ -125,9 +125,6 @@ var DeviceLocation = new Class({
 			}
 		}
 		catch(exception) {}
-		
-		/* stop any further process if exist */
-		this.stop();
 	},
 	
 	locate_parseLocation: function(position) {
@@ -210,6 +207,9 @@ var DeviceLocation = new Class({
 		if($defined(this.autoLocate_onError) && this.autoLocate_onError instanceof Function) 
 			this.autoLocate_onError(error);
 		else this.default_onError(error);
+		
+		/* stop any further process if exist */
+		this.stop();
 	},
 	
 	/** A locate me once function */
