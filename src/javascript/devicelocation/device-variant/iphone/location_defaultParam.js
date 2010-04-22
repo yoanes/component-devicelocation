@@ -36,8 +36,19 @@ _DEVICELOCATION_WM_.AutoLocate.onlocate = function(position) {
 			var address = addresses.results[0]; 
 			var displayAddress = "";
 			displayAddress += address.streetNumber + " " + address.street.fullName.toLowerCase() + ", " + address.suburb.toLowerCase() + ", " + address.state;
-			if($('approximatePlaceName')) 
-				$('approximatePlaceName').innerHTML = 'Current Location';
+			if(!$('approximate')) {
+				if($('approximatePlaceName')) 
+					$('approximatePlaceName').innerHTML = 'Current Location';
+				else {
+					var approxPlaceName = new Element('div');
+					approxPlaceName.id = 'approximatePlaceName';
+					approxPlaceName.style.fontWeight = 'bold';
+					approxPlaceName.style.marginBottom = '3px';
+					approxPlaceName.innerHTML = 'Current Location';
+					
+					$('currentAddress').parentNode.insertBefore(approxPlaceName, $('currentAddress'));
+				}
+			}
 			$('currentAddress').innerHTML = displayAddress + ' &#177;' + Math.ceil(position.accuracy) + 'm';
 			
 			if(_DEVICELOCATION_WM_.marker != null)
@@ -74,10 +85,8 @@ _DEVICELOCATION_WM_.AutoLocate.postlocate = function() {
 _DEVICELOCATION_WM_.AutoLocate.onerror = function(error) { 
 	$('locateMeButton').src = _DEVICELOCATION_WM_.hold; 
 	
-	sensis.log('error.code: ' + error.code);
 	if(error.code == error.PERMISSION_DENIED) {
 		_DEVICELOCATION_WM_.disabled = true;
-		sensis.log('permission denied');
 	}
 };
 
