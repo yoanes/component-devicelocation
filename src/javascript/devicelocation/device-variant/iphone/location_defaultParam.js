@@ -43,7 +43,7 @@ _DEVICELOCATION_WM_.AutoLocate.onlocate = function(position) {
 					var approxPlaceName = new Element('div');
 					approxPlaceName.id = 'approximatePlaceName';
 					approxPlaceName.style.fontWeight = 'bold';
-					approxPlaceName.style.marginBottom = '3px';
+					approxPlaceName.style.margin = '3px 0px 0px 3px';
 					approxPlaceName.innerHTML = 'Current Location';
 					
 					$('currentAddress').parentNode.insertBefore(approxPlaceName, $('currentAddress'));
