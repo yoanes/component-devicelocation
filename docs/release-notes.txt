@@ -1,15 +1,9 @@
-==== Version 1.0.1-003 (tag: devicelocation_v1_0_1_003) ====
-
-Initial Release.
-
-==== Version 1.0.1-004 (tag: devicelocation_v1_0_1_004) ====
-
-* Add a devicelocation:setup tag for the client sites to use.
-* Ensure component only targets Android & iPhone.
-
-==== Version 1.0.1-005 (tag: devicelocation_v1_0_1_005) ====
-
-* Ensure component can target Android 2.0 and greater, iPhone 3.0 and greater.
+==== Version 1.1.0(tag: devicelocation_v1_1_0) ====
+* Convert additional options of devicelocation as limits, so they are only considered when set.
+* Stop locating every time the navigator object throws an error.
+* Clear the autoLocate's lastRecordedPosition attribute every time it stops to force a fresh start for
+  the next autoLocate call
+* UI fixes for the WM default parameter
 
 ==== Version 1.0.1-006 (tag: devicelocation_v1_0_1_006) ====
 
@@ -18,3 +12,16 @@ Initial Release.
 - Auto Locate will now supports calling a final "done" function when it stops.
 - Made the locate & autoLocate options separately configurable.
 - Updated to latest core & build scripts so that the component js includes a version in the filename.
+
+==== Version 1.0.1-005 (tag: devicelocation_v1_0_1_005) ====
+
+* Ensure component can target Android 2.0 and greater, iPhone 3.0 and greater.
+
+==== Version 1.0.1-004 (tag: devicelocation_v1_0_1_004) ====
+
+* Add a devicelocation:setup tag for the client sites to use.
+* Ensure component only targets Android & iPhone.
+
+==== Version 1.0.1-003 (tag: devicelocation_v1_0_1_003) ====
+
+Initial Release.
