@@ -1,4 +1,4 @@
-==== Version 1.1.0(tag: devicelocation_v1_1_0) ====
+==== Version 1.0.3(tag: devicelocation_v1_0_3) ====
 * Convert additional options of devicelocation as limits, so they are only considered when set.
 * Stop locating every time the navigator object throws an error.
 * Clear the autoLocate's lastRecordedPosition attribute every time it stops to force a fresh start for
