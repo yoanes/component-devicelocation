@@ -10,21 +10,33 @@
       -->    
     
     <identifiedDeviceConfig>
+    
         <deviceId>Apple</deviceId>
+        
         <deviceConfig xsi:type="devicelocation:DeviceConfig">
             <deviceLocationAware>true</deviceLocationAware>
         </deviceConfig>
         
         <userAgentDeviceConfig>
-            <useragentRegex>.*Version/[012]\..*</useragentRegex>
+            <useragentRegex>.*OS [012]_.*</useragentRegex>
             <deviceConfig xsi:type="devicelocation:DeviceConfig">
                 <deviceLocationAware>false</deviceLocationAware>
             </deviceConfig>
         </userAgentDeviceConfig>
+        
+        <userAgentDeviceConfig>
+            <useragentRegex>.*OS 3_0_.*</useragentRegex>
+            <deviceConfig xsi:type="devicelocation:DeviceConfig">
+                <deviceLocationAware>false</deviceLocationAware>
+            </deviceConfig>
+        </userAgentDeviceConfig>
+        
     </identifiedDeviceConfig>
     
     <identifiedDeviceConfig>
+    
         <deviceId>Android-OS</deviceId>
+        
         <deviceConfig xsi:type="devicelocation:DeviceConfig">
             <deviceLocationAware>true</deviceLocationAware>
         </deviceConfig>

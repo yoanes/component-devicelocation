@@ -1,3 +1,6 @@
+==== Version 1.0.4 (tag: devicelocation_v1_0_4) ====
+* Exclude iPhone 3.0.x
+
 ==== Version 1.0.3(tag: devicelocation_v1_0_3) ====
 * Convert additional options of devicelocation as limits, so they are only considered when set.
 * Stop locating every time the navigator object throws an error.
