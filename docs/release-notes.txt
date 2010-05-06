@@ -1,3 +1,7 @@
+==== Version 1.0.4-001 (tag: devicelocation_v1_0_4) ====
+* Bug-Fix - Make sure we also exclude iPhone 3.0
+* Modified showcase to explicitly display a message when device does not support device location.
+
 ==== Version 1.0.4 (tag: devicelocation_v1_0_4) ====
 * Exclude iPhone 3.0.x
 
