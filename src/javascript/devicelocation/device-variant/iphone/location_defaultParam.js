@@ -1,5 +1,7 @@
 _DEVICELOCATION_WM_ = {};
 
+_DEVICELOCATION_WM_.errorMessage = "Sorry, we couldn't locate you.";
+
 _DEVICELOCATION_WM_.Locate = {};
 _DEVICELOCATION_WM_.Locate.onlocate = null;
 _DEVICELOCATION_WM_.Locate.prelocate= null;
@@ -78,8 +80,12 @@ _DEVICELOCATION_WM_.AutoLocate.onlocate = function(position) {
 
 _DEVICELOCATION_WM_.AutoLocate.prelocate = null;
 
-_DEVICELOCATION_WM_.AutoLocate.postlocate = function() { 
-	$('locateMeButton').src = _DEVICELOCATION_WM_.hold; 
+_DEVICELOCATION_WM_.AutoLocate.postlocate = function(lastRecordedPosition) { 
+	$('locateMeButton').src = _DEVICELOCATION_WM_.hold;
+	
+	if(!$defined(lastRecordedPosition)) {
+		alert(_DEVICELOCATION_WM_.errorMessage);
+	}
 };
 
 _DEVICELOCATION_WM_.AutoLocate.onerror = function(error) { 
@@ -88,6 +94,8 @@ _DEVICELOCATION_WM_.AutoLocate.onerror = function(error) {
 	if(error.code == error.PERMISSION_DENIED) {
 		_DEVICELOCATION_WM_.disabled = true;
 	}
+	
+	alert(_DEVICELOCATION_WM_.errorMessage);
 };
 
 _DEVICELOCATION_WM_.AutoLocate.limits = {};

@@ -135,7 +135,7 @@ var DeviceLocation = new Class({
 		else this.default_onLocate(position);
 		
 		if($defined(this.locate_postLocate) && this.locate_postLocate instanceof Function) {
-			this.locate_postLocate();
+			this.locate_postLocate(this.locate_lastRecordedPosition);
 		}
 	},
 
@@ -243,7 +243,7 @@ var DeviceLocation = new Class({
 		navigator.geolocation.clearWatch(this._autoLocate_locationId);
 		clearTimeout(this._autoLocate_timeoutId);
 		if($defined(this.autoLocate_postLocate) && this.autoLocate_postLocate instanceof Function)
-			this.autoLocate_postLocate();
+			this.autoLocate_postLocate(this.autoLocate_lastRecordedPosition);
 
 		this.reset();
 	},
