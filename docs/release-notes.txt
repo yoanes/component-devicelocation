@@ -1,4 +1,4 @@
-==== Version 1.0.4-002 (tag: devicelocation_v1_0_4) ====
+==== Version 1.0.4-002 (tag: devicelocation_v1_0_4-002) ====
 * postLocate() now will pass the lastRecordedPosition as argument
 * add additional default parameter for whereisMobile
 
