@@ -1,3 +1,6 @@
+==== Version 1.0.4-003 (tag: devicelocation_v1_0_4-003) ====
+* Report to server when the client encounter an error
+
 ==== Version 1.0.4-002 (tag: devicelocation_v1_0_4-002) ====
 * postLocate() now will pass the lastRecordedPosition as argument
 * add additional default parameter for whereisMobile
