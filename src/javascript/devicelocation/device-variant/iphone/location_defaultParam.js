@@ -85,6 +85,7 @@ _DEVICELOCATION_WM_.AutoLocate.postlocate = function(lastRecordedPosition) {
 	
 	if(!$defined(lastRecordedPosition)) {
 		alert(_DEVICELOCATION_WM_.errorMessage);
+		Reporting.to('http://'+window.location.host+'/?dError=1');
 	}
 };
 
@@ -95,6 +96,7 @@ _DEVICELOCATION_WM_.AutoLocate.onerror = function(error) {
 		_DEVICELOCATION_WM_.disabled = true;
 	}
 	
+	Reporting.to('http://'+window.location.host+'/?dError=1');
 	alert(_DEVICELOCATION_WM_.errorMessage);
 };
 
