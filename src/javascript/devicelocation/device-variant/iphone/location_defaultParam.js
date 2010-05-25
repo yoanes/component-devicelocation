@@ -94,6 +94,7 @@ _DEVICELOCATION_WM_.AutoLocate.onerror = function(error) {
 	
 	if(error.code == error.PERMISSION_DENIED) {
 		_DEVICELOCATION_WM_.disabled = true;
+		$('locateMeButton').style.opacity = '0.3';
 	}
 	
 	Reporting.to('http://'+window.location.host+'/?dError=1');
