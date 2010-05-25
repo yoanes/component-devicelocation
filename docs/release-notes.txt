@@ -1,3 +1,6 @@
+==== Version 1.0.4-004 (tag: devicelocation_v1_0_4-004) ====
+* Grey out the locate me button on permission denied
+
 ==== Version 1.0.4-003 (tag: devicelocation_v1_0_4-003) ====
 * Report to server when the client encounter an error
 
