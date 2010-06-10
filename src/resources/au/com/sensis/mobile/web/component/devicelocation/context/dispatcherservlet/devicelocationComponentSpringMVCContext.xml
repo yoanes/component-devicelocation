@@ -11,8 +11,8 @@
     <bean name="devicelocation.comp.handlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <value>
-                @{devicelocation.comp.handler.mapping.url.prefix}/js/**/*=devicelocation.comp.getJavaScriptBundle
-                @{devicelocation.comp.handler.mapping.url.prefix}/jsmember/**/*=core.comp.getJavaScriptBundleMember
+                @{devicelocation.comp.handler.mapping.url.prefix}/**/js/**/*=devicelocation.comp.getJavaScriptBundle
+                @{devicelocation.comp.handler.mapping.url.prefix}/**/jsmember/**/*=core.comp.getJavaScriptBundleMember
             </value>
         </property>
         <property name="interceptors">

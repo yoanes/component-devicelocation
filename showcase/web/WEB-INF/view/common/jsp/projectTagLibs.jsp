@@ -7,5 +7,5 @@
   --%>
 
 <%@ taglib prefix="map" uri="/au/com/sensis/mobile/web/component/map/map.tld"%>
-<%@ taglib prefix="core" uri="/au/com/sensis/mobile/web/component/core/core.tld"%>
+<%@ taglib prefix="base" uri="/au/com/sensis/mobile/web/component/core/base/base.tld"%>
 <%@ taglib prefix="devicelocation" uri="/au/com/sensis/mobile/web/component/devicelocation/devicelocation.tld"%>

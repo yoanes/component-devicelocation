@@ -7,7 +7,7 @@
 <c:set var="componentName">
     <fmt:message key="comp.name" />
 </c:set>
-<core:deviceConfig var="deviceConfig" device="${context.device}" 
+<base:deviceConfig var="deviceConfig" device="${context.device}" 
     registryBeanName="${componentName}.comp.deviceConfigRegistry"/>
 
 <div id="testbed">
@@ -23,7 +23,7 @@
 	</c:choose>
 
 	
-	<map:render map="${map}" zoomInUrl="zoomInUrl" zoomOutUrl="zoomOutUrl" 
+	<map:render device="${context.device}" map="${map}" zoomInUrl="zoomInUrl" zoomOutUrl="zoomOutUrl" 
             panNorthUrl="panNorthUrl" panSouthUrl="panSouthUrl"
             panEastUrl="panEastUrl" panWestUrl="panWestUrl"
             photoLayerUrl="photoLayerUrl" mapLayerUrl="mapLayerUrl"

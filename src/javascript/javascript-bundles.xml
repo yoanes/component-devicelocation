@@ -3,7 +3,7 @@
     xmlns:bs="http://mobile.sensis.com.au/build-scripts"
     xsi:schemaLocation="http://mobile.sensis.com.au/build-scripts au.com.sensis.mobile.bundles.xsd">
               
-    <bundles basename="devicelocation-component" subpackage="devicelocation">
+    <bundles basename="devicelocation-component" package="devicelocation">
         <bundle name="iphone">        
             <fileset dir="${src.javascript.dir}/devicelocation/device-variant/iphone">
             </fileset>

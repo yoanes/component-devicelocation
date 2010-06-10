@@ -5,7 +5,7 @@
   - add component setup tags to tiles that extend the standard testbed base tile. 
   --%>
 
-<map:setup map="${map}" />
+<map:setup map="${map}" device="${context.device}"/>
 <devicelocation:setup />
 <mcs:script type="text/javascript">
 	new DeviceLocation(null, {
