@@ -75,7 +75,7 @@ _DEVICELOCATION_WM_.AutoLocate.onlocate = function(position) {
 		}
 	});
 	
-	Reporting.to('http://'+window.location.host+'/?dlat='+position.latitude+'&dlon='+position.longitude+'&prox='+position.accuracy);
+	Reporting.to('http://'+window.location.host+'/', {dlat: position.latitude, dlon: position.longitude, prox:position.accuracy}, null);
 };
 
 _DEVICELOCATION_WM_.AutoLocate.prelocate = null;
@@ -85,7 +85,7 @@ _DEVICELOCATION_WM_.AutoLocate.postlocate = function(lastRecordedPosition) {
 	
 	if(!$defined(lastRecordedPosition)) {
 		alert(_DEVICELOCATION_WM_.errorMessage);
-		Reporting.to('http://'+window.location.host+'/?dError=1');
+		Reporting.to('http://'+window.location.host+'/', {dError: 1}, null);
 	}
 };
 
@@ -96,9 +96,6 @@ _DEVICELOCATION_WM_.AutoLocate.onerror = function(error) {
 		_DEVICELOCATION_WM_.disabled = true;
 		$('locateMeButton').style.opacity = '0.3';
 	}
-	
-	Reporting.to('http://'+window.location.host+'/?dError=1');
-	alert(_DEVICELOCATION_WM_.errorMessage);
 };
 
 _DEVICELOCATION_WM_.AutoLocate.limits = {};
