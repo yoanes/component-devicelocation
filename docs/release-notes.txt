@@ -1,3 +1,6 @@
+==== Version 1.1.1 (tag: devicelocation_v1_1_1) ====
+Fix the double error messages when error occured
+
 ==== Version 1.1.0 (tag: devicelocation_v1_1_0) ====
 
 Upgraded libs:
