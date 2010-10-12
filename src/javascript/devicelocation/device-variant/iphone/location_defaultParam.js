@@ -103,3 +103,61 @@ _DEVICELOCATION_WM_.AutoLocate.limits.tries = 10;
 _DEVICELOCATION_WM_.AutoLocate.limits.proximity = 50;
 _DEVICELOCATION_WM_.AutoLocate.limits.timeout = 30000;
 _DEVICELOCATION_WM_.AutoLocate.limits.acceptableProximity = 1000;
+
+//Yellow Mobile Default Parameters
+_DEVICELOCATION_YM_ = {};
+
+_DEVICELOCATION_YM_.Locate = {};
+_DEVICELOCATION_YM_.Locate.onlocate = null;
+_DEVICELOCATION_YM_.Locate.prelocate= null;
+_DEVICELOCATION_YM_.Locate.postlocate= null;
+_DEVICELOCATION_YM_.Locate.onerror = null;
+
+_DEVICELOCATION_YM_.disabled = false;
+
+_DEVICELOCATION_YM_.marker = null;
+
+_DEVICELOCATION_YM_.AutoLocate = {};
+
+
+_DEVICELOCATION_YM_.AutoLocate.prelocate = function() {
+	
+	if ($('findLocationInput').value == 'Current Location') {
+
+		var latField = document.createElement('input');
+		latField.setAttribute('id', 'latVal');
+		latField.setAttribute('type', 'hidden');
+		latField.setAttribute('name', 'lat');
+		latField.setAttribute('value', '');
+		
+		var lonField = document.createElement('input');
+		lonField.setAttribute('id', 'lonVal');
+		lonField.setAttribute('type', 'hidden');
+		lonField.setAttribute('name', 'lon');
+		lonField.setAttribute('value', '');
+
+		document.getElementById('findFormModel').appendChild(latField);
+		document.getElementById('findFormModel').appendChild(lonField);
+	}			
+};
+
+
+_DEVICELOCATION_YM_.AutoLocate.onlocate = function(position) {	
+	$('latVal').setAttribute('value', position.latitude);
+	$('lonVal').setAttribute('value', position.longitude);
+};
+
+_DEVICELOCATION_YM_.AutoLocate.postlocate = function(position) {
+	$('findFormModel').submit();
+};
+
+_DEVICELOCATION_YM_.AutoLocate.onerror = function(error) { 
+	$('findFormModel').submit(); 
+};
+
+_DEVICELOCATION_YM_.AutoLocate.limits = {};
+_DEVICELOCATION_YM_.AutoLocate.limits.tries = 10;
+_DEVICELOCATION_YM_.AutoLocate.limits.proximity = 20;
+_DEVICELOCATION_YM_.AutoLocate.limits.timeout = 7000;
+_DEVICELOCATION_YM_.AutoLocate.limits.acceptableProximity = 500;
+
