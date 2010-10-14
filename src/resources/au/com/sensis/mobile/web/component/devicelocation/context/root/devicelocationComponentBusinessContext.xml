@@ -8,25 +8,5 @@
                 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
                 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
    
-<!--                 
-    Sample Delegate bean declaration. Note that the id convention.
-    
-    <bean id="devicelocation.devicelocationDelegate"
-            class="au.com.sensis.mobile.web.component.devicelocation.business.TemplateDelegateImpl"
-            init-method="validateState">
-    </bean>
--->    
-
-    
-    <bean id="devicelocation.comp.deviceConfigRegistry"
-        class="au.com.sensis.mobile.web.component.devicelocation.device.DeviceLocationDeviceConfigRegistry">
-        <constructor-arg index="0" value="@{devicelocation.comp.device.config.classpath}"/>
-        <constructor-arg index="1">
-            <bean class="au.com.sensis.wireless.common.utils.jaxb.JaxbXMLBinderImpl">
-                <constructor-arg index="0" value="au.com.sensis.mobile.web.component.devicelocation.device.generated:au.com.sensis.mobile.web.component.core.device.generated"/>
-                <property name="validationEnabled" value="true"/>
-            </bean>
-        </constructor-arg>
-    </bean>
     
 </beans>

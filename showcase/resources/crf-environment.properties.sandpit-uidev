@@ -1,0 +1,12 @@
+########################################################
+## ENVIRONMENT : SANDPIT-UIDEV
+########################################################
+
+env.resources.jsp.root.dir=/app/smtestapp/sandpit-uidev/devicelocation-component/webapp
+env.resources.css.root.dir=/app/smtestapp/sandpit-uidev/devicelocation-component/webapp/resources/css
+env.resources.javascript.root.dir=/app/smtestapp/sandpit-uidev/devicelocation-component/webapp/resources/javascript
+env.resources.images.root.dir=/app/smtestapp/sandpit-uidev/devicelocation-component/webapp/resources/images
+
+env.resources.css.client.path.prefix=/uidev/devicelocation-component-showcase/resources/css/
+env.resources.javascript.client.path.prefix=/uidev/devicelocation-component-showcase/resources/javascript/
+env.resources.images.client.path.prefix=/uidev/devicelocation-component-showcase/resources/images/

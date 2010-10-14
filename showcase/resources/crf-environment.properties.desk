@@ -1,0 +1,12 @@
+########################################################
+## ENVIRONMENT : DESK
+########################################################
+
+env.resources.jsp.root.dir=D:/tomcat/Tomcat6.0_2/webapps/wl-devicelocation-component-showcase/
+env.resources.css.root.dir=D:/tomcat/Tomcat6.0_2/webapps/wl-devicelocation-component-showcase/resources/css
+env.resources.javascript.root.dir=D:/tomcat/Tomcat6.0_2/webapps/wl-devicelocation-component-showcase/resources/javascript
+env.resources.images.root.dir=D:/tomcat/Tomcat6.0_2/webapps/wl-devicelocation-component-showcase/resources/images
+
+env.resources.css.client.path.prefix=/resources/css/
+env.resources.javascript.client.path.prefix=/resources/javascript/
+env.resources.images.client.path.prefix=/resources/images/
