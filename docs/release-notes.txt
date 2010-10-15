@@ -1,3 +1,9 @@
+==== Version 2.0.1 (tag: devicelocation_v2_0_1) ====
+
+Closing off iteration 2.0.1 of component migration to the Content Rendering Framework. Jiras:
+* CUI-290 GPS - Content Rendering Framework migration - Java 
+* CUI-299 GPS - Content Rendering Framework migration - UI 
+
 ==== Version 2.0.0-001 (tag: devicelocation_v2_0_0-001) ====
 - CUI-299
 
