@@ -1,11 +1,5 @@
-==== Version 2.0.1 (tag: devicelocation_v2_0_1) ====
-
-Closing off iteration 2.0.1 of component migration to the Content Rendering Framework. Jiras:
-* CUI-290 GPS - Content Rendering Framework migration - Java 
-* CUI-299 GPS - Content Rendering Framework migration - UI 
-
-==== Version 2.0.0-001 (tag: devicelocation_v2_0_0-001) ====
-- CUI-299
+==== Version 1.1.6 (tag: devicelocation_v1_1_6) ====
+Location Component development for Yellow Mobile is complete. Settings have been optimised.
 
 ==== Version 1.1.1 (tag: devicelocation_v1_1_1) ====
 Fix the double error messages when error occured
