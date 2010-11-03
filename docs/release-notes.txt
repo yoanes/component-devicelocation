@@ -1,3 +1,6 @@
+==== Version 1.1.7 (tag: devicelocation_v1_1_7) ====
+Fixed bug in yellow location where a previous result is returned in certain circumstances
+
 ==== Version 1.1.6 (tag: devicelocation_v1_1_6) ====
 Location Component development for Yellow Mobile is complete. Settings have been optimised.
 

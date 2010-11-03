@@ -124,20 +124,30 @@ _DEVICELOCATION_YM_.AutoLocate.prelocate = function() {
 	
 	if ($('findLocationInput').value == 'Current Location') {
 
-		var latField = document.createElement('input');
-		latField.setAttribute('id', 'latVal');
-		latField.setAttribute('type', 'hidden');
-		latField.setAttribute('name', 'lat');
-		latField.setAttribute('value', '');
+		if($('latVal')) {
+			$('latVal').value = '';
+		} else {
+			var latField = document.createElement('input');
+			latField.setAttribute('id', 'latVal');
+			latField.setAttribute('type', 'hidden');
+			latField.setAttribute('name', 'lat');
+			latField.setAttribute('value', '');
+			
+			document.getElementById('findFormModel').appendChild(latField);
+		}
 		
-		var lonField = document.createElement('input');
-		lonField.setAttribute('id', 'lonVal');
-		lonField.setAttribute('type', 'hidden');
-		lonField.setAttribute('name', 'lon');
-		lonField.setAttribute('value', '');
-
-		document.getElementById('findFormModel').appendChild(latField);
-		document.getElementById('findFormModel').appendChild(lonField);
+		if($('lonVal')) {
+			$('lonVal').value = '';
+		} else {
+			var lonField = document.createElement('input');
+			lonField.setAttribute('id', 'lonVal');
+			lonField.setAttribute('type', 'hidden');
+			lonField.setAttribute('name', 'lon');
+			lonField.setAttribute('value', '');
+			
+			document.getElementById('findFormModel').appendChild(lonField);
+		}
+		
 	}			
 };
 
@@ -152,6 +162,12 @@ _DEVICELOCATION_YM_.AutoLocate.postlocate = function(position) {
 };
 
 _DEVICELOCATION_YM_.AutoLocate.onerror = function(error) { 
+	if($('lonVal')) {
+		$('lonVal').value = '';
+	} 
+	if($('latVal')) {
+		$('latVal').value = '';
+	}
 	$('findFormModel').submit(); 
 };
 
