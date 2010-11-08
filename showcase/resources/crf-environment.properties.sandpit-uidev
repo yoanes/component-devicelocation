@@ -3,10 +3,11 @@
 ########################################################
 
 env.resources.jsp.root.dir=/app/smtestapp/sandpit-uidev/devicelocation-component/webapp
-env.resources.css.root.dir=/app/smtestapp/sandpit-uidev/devicelocation-component/webapp/resources/css
-env.resources.javascript.root.dir=/app/smtestapp/sandpit-uidev/devicelocation-component/webapp/resources/javascript
-env.resources.images.root.dir=/app/smtestapp/sandpit-uidev/devicelocation-component/webapp/resources/images
+env.resources.css.root.dir=/app/smtestapp/sandpit-uidev/devicelocation-component/webapp/uiresources/css
+env.resources.javascript.root.dir=/app/smtestapp/sandpit-uidev/devicelocation-component/webapp/uiresources/javascript
+env.resources.images.root.dir=/app/smtestapp/sandpit-uidev/devicelocation-component/webapp/uiresources/images
+env.resources.properties.root.dir=/app/smtestapp/sandpit-uidev/devicelocation-component/webapp/WEB-INF/properties
 
-env.resources.css.client.path.prefix=/uidev/devicelocation-component-showcase/resources/css/
-env.resources.javascript.client.path.prefix=/uidev/devicelocation-component-showcase/resources/javascript/
-env.resources.images.client.path.prefix=/uidev/devicelocation-component-showcase/resources/images/
+env.resources.css.client.path.prefix=/uidev/devicelocation-component-showcase/uiresources/css/
+env.resources.javascript.client.path.prefix=/uidev/devicelocation-component-showcase/uiresources/javascript/
+env.resources.images.client.path.prefix=/uidev/devicelocation-component-showcase/uiresources/images/

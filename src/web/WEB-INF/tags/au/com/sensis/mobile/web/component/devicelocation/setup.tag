@@ -13,8 +13,6 @@
     type="au.com.sensis.wireless.common.volantis.devicerepository.api.Device"  
     description="Device of the current user." %>
     
-<base:compMcsBasePath var="compMcsBasePath" />
-
 <%-- Setup components that we depend on. --%>
 <base:setup device="${device}"/>
 <util:setup device="${device}"/>

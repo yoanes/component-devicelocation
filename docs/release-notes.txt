@@ -1,3 +1,12 @@
+==== Version 2.0.2 (tag: devicelocation_v2_0_2) ====
+
+Now depends on:
+
+    <dependency org="com.sensis" name="wl-build-scripts" rev="2.0.9" conf="buildBootstrap->default" />
+    <dependency org="com.sensis" name="wl-crf" rev="0.1.2-103" conf="default" />        
+    <dependency org="com.sensis" name="wl-core-component" rev="2.0.4" conf="default,test"/>
+    <dependency org="com.sensis" name="wl-webapp-testbed" rev="2.0.6" conf="showcase->default"/>        
+
 ==== Version 2.0.1 (tag: devicelocation_v2_0_1) ====
 
 Closing off iteration 2.0.1 of component migration to the Content Rendering Framework. Jiras:
