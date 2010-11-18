@@ -11,6 +11,9 @@
 <div id="testbed">
     <h1>Device Location Showcase...</h1>
 
+	<div>
+		isDeviceLocationAware: <s:property value="deviceLocationAware"/>
+	</div>
 	<jsp:include page="/WEB-INF/view/jsp/deviceLocationLink.crf" />
 
 </div>

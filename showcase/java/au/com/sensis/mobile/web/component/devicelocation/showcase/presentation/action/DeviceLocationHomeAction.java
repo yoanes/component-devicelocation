@@ -7,6 +7,8 @@ import au.com.sensis.address.WGS84Point;
 import au.com.sensis.mobile.web.component.map.business.MapDelegate;
 import au.com.sensis.mobile.web.component.map.model.Map;
 */
+import au.com.sensis.mobile.web.component.devicelocation.business.DeviceLocationDelegate;
+
 import au.com.sensis.mobile.web.testbed.ResultName;
 import au.com.sensis.mobile.web.testbed.presentation.framework.BusinessAction;
 import au.com.sensis.wireless.manager.mapping.MapLayer;
@@ -20,11 +22,20 @@ import au.com.sensis.wireless.manager.mapping.MobilesIconType;
  */
 public class DeviceLocationHomeAction extends BusinessAction {
 
-    private static final Logger LOGGER = Logger
-    .getLogger(DeviceLocationHomeAction.class);
+    private static final Logger LOGGER = Logger.getLogger(DeviceLocationHomeAction.class);
 
     private static final int EXAMPLE_LOOM_LEVEL = 10;
 
+    private DeviceLocationDelegate deviceLocationDelegate;
+    
+    public void setDeviceLocationDelegate(final DeviceLocationDelegate deviceLocationDelegate) {
+    	this.deviceLocationDelegate = deviceLocationDelegate;
+    }
+    
+    public DeviceLocationDelegate getDeviceLocationDelegate(){
+    	return this.deviceLocationDelegate;
+    }
+    
     /**
      * As used by struts.
      *
@@ -35,7 +46,11 @@ public class DeviceLocationHomeAction extends BusinessAction {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Map dependency removed; mapUrl is no longer required");
         }
-
+        
         return ResultName.SUCCESS;
+    }
+    
+    public boolean isDeviceLocationAware() {
+    	return getDeviceLocationDelegate().isDeviceLocationSupported(getContext());
     }
 }

@@ -8,8 +8,7 @@
     <bean id="homeAction" class="au.com.sensis.mobile.web.component.devicelocation.showcase.presentation.action.DeviceLocationHomeAction"
             scope="prototype">
         
-        <property name="mapDelegate" ref="map.comp.mapDelegate"/>	
-        
+        <property name="deviceLocationDelegate" ref="devicelocation.comp.deviceLocationDelegate" />
     </bean>
     
     

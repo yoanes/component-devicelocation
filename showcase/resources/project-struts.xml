@@ -22,7 +22,7 @@
     <package name="testbed-sample" namespace="/" extends="testbed-default">
 
         <!-- Home Page Action -->
-        <action name="home" class="dumbAction">
+        <action name="home" class="homeAction">
             <result name="success" type="tiles">testbed.home</result>
         </action>
 
