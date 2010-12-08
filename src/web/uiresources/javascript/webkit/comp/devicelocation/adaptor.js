@@ -119,25 +119,34 @@ _DEVICELOCATION_YM_.marker = null;
 
 _DEVICELOCATION_YM_.AutoLocate = {};
 
-
 _DEVICELOCATION_YM_.AutoLocate.prelocate = function() {
 	
-	if ($('findLocationInput').value == 'Current Location') {
+	if ($('suburb').value == 'Current Location') {
 
-		var latField = document.createElement('input');
-		latField.setAttribute('id', 'latVal');
-		latField.setAttribute('type', 'hidden');
-		latField.setAttribute('name', 'lat');
-		latField.setAttribute('value', '');
+		if($('latVal')) {
+			$('latVal').value = '';
+		} else {
+			var latField = document.createElement('input');
+			latField.setAttribute('id', 'latVal');
+			latField.setAttribute('type', 'hidden');
+			latField.setAttribute('name', 'lat');
+			latField.setAttribute('value', '');
+			
+			document.getElementById('findForm').appendChild(latField);
+		}
 		
-		var lonField = document.createElement('input');
-		lonField.setAttribute('id', 'lonVal');
-		lonField.setAttribute('type', 'hidden');
-		lonField.setAttribute('name', 'lon');
-		lonField.setAttribute('value', '');
-
-		document.getElementById('findFormModel').appendChild(latField);
-		document.getElementById('findFormModel').appendChild(lonField);
+		if($('lonVal')) {
+			$('lonVal').value = '';
+		} else {
+			var lonField = document.createElement('input');
+			lonField.setAttribute('id', 'lonVal');
+			lonField.setAttribute('type', 'hidden');
+			lonField.setAttribute('name', 'lon');
+			lonField.setAttribute('value', '');
+			
+			document.getElementById('findForm').appendChild(lonField);
+		}
+		
 	}			
 };
 
@@ -148,16 +157,22 @@ _DEVICELOCATION_YM_.AutoLocate.onlocate = function(position) {
 };
 
 _DEVICELOCATION_YM_.AutoLocate.postlocate = function(position) {
-	$('findFormModel').submit();
+	$('findForm').submit();
 };
 
 _DEVICELOCATION_YM_.AutoLocate.onerror = function(error) { 
-	$('findFormModel').submit(); 
+	if($('lonVal')) {
+		$('lonVal').value = '';
+	} 
+	if($('latVal')) {
+		$('latVal').value = '';
+	}
+	$('findForm').submit(); 
 };
 
 _DEVICELOCATION_YM_.AutoLocate.limits = {};
 _DEVICELOCATION_YM_.AutoLocate.limits.tries = 10;
-_DEVICELOCATION_YM_.AutoLocate.limits.proximity = 20;
+_DEVICELOCATION_YM_.AutoLocate.limits.proximity = 50;
 _DEVICELOCATION_YM_.AutoLocate.limits.timeout = 7000;
-_DEVICELOCATION_YM_.AutoLocate.limits.acceptableProximity = 500;
+_DEVICELOCATION_YM_.AutoLocate.limits.acceptableProximity = 1050;
 
