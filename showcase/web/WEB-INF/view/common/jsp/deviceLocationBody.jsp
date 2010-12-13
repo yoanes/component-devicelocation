@@ -14,6 +14,6 @@
 	<div>
 		isDeviceLocationAware: <s:property value="deviceLocationAware"/>
 	</div>
-	<jsp:include page="/WEB-INF/view/jsp/deviceLocationLink.crf" />
+	<jsp:include page="/WEB-INF/view/jsp/comp/devicelocation/deviceLocationLink.crf" />
 
 </div>

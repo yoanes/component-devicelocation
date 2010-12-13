@@ -6,14 +6,22 @@
          
 	<config-path>comp/devicelocation</config-path>         
     <groups>    
-    	<group name="webkit" expr="( 
-    			device.isA('Apple') and 
-    				(device.getUserAgent() !~ '.*OS [012]_.*' or device.getUserAgent() !~ '.*OS 3_0.*')
+    	<group name="devicelocation-webkit" expr="( 
+    			device.isA('Apple') 
+                    and (device.getUserAgent() !~ '.*OS [012]_.*') 
+                    and (device.getUserAgent() !~ '.*OS 3_0.*')
     		) or (
     			device.isA('Android-OS') and (device.getUserAgent() !~ '.*Android 1.*') 
     		)" />
     		
-    	<group name="rim" expr="device.isA('RIM-Blackberry-9000')"/>
+        <!--
+          - Disabling black berry 9000 support. Even though we have the JavaScript for it, it 
+          - was never actually enabled in the old Volantis MCS component and, hence, never tested.
+          - Furthermore, the requirements were changed so that it was out of scope.  
+          -->
+        <!-- 
+    	<group name="devicelocation-rim" expr="device.isA('RIM-Blackberry-9000')"/>
+        -->
     
     	<default-group name="default" />
     </groups>

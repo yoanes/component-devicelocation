@@ -6,13 +6,13 @@ import au.com.sensis.mobile.crf.service.PropertiesLoader;
 import au.com.sensis.wireless.web.mobile.MobileContext;
 
 public class DeviceLocationDelegate{
-	
+
 	private PropertiesLoader propertiesConfigLoader;
 
     private String abstractPropertiesPath;
-    
+
     private String supportDeviceLocationPropertyName;
-    
+
     /**
      * @return the propertiesConfigLoader
      */
@@ -56,13 +56,18 @@ public class DeviceLocationDelegate{
             final String supportDeviceLocationPropertyName) {
         this.supportDeviceLocationPropertyName = supportDeviceLocationPropertyName;
     }
-    
+
+    /**
+     * @param mobileContext
+     *            {@link MobileContext} for the current requset.
+     * @return true if the current device is supported by this component.
+     */
     public boolean isDeviceLocationSupported(final MobileContext mobileContext) {
-    	final Properties properties =
-            getPropertiesConfigLoader().loadProperties(mobileContext.getDevice(),
-                    getAbstractPropertiesPath());
-    	
-    	return  Boolean.parseBoolean(properties.getProperty(getSupportDeviceLocationPropertyName()));
-    	
+        final Properties properties =
+                getPropertiesConfigLoader().loadProperties(mobileContext.getDevice(),
+                        getAbstractPropertiesPath());
+
+        return Boolean.parseBoolean(properties.getProperty(getSupportDeviceLocationPropertyName()));
+
     }
 }
