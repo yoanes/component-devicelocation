@@ -1,19 +1,22 @@
 ==== Version 2.0.5 (tag: devicelocation_v2_0_5) ====
 
-* Fixed config to be consistent. Previous config made it look like Blackberry 9000 would get 
-  deviicelocation when in fact it would not. 
-* Added "devicelocation" prefix to group names since the expressions are devicelocation 
-  specific.
-* Fixed group config expr to exclude Apple OS 0.x, 1.x, 2.x and 3.0.x (previous expression tried
-  to do this but got it wrong).
-* setup.tag now routes to setup.jsp so that the setup tags of dependencies are not called
-  if the current device is not supported by this device location component.  
-    
-    <base:setup device="${device}"/>
-    <util:setup device="${device}"/>
-    <logging:setup device="${device}"/>
-      
-* Fixed showcase so that the behaviour is actually correct. Fixed checkstyle warnings.
+Jiras:
+* CUI-328 GPS - should not be served to Apple OS 0.x, 1.x, 2.x and 3.0.x 
+    * Fixed group config expr to exclude Apple OS 0.x, 1.x, 2.x and 3.0.x (previous expression 
+      tried to do this but got it wrong).
+    * Also made a bunch of other fixes whilst I was at it: 
+        * Fixed config to be consistent. Previous config made it look like Blackberry 9000 would 
+          get deviicelocation when in fact it would not. 
+        * Added "devicelocation" prefix to group names since the expressions are devicelocation 
+          specific.
+        * setup.tag now routes to setup.jsp so that the setup tags of dependencies are not called
+          if the current device is not supported by this device location component.  
+            
+            <base:setup device="${device}"/>
+            <util:setup device="${device}"/>
+            <logging:setup device="${device}"/>
+              
+        * Fixed showcase so that the behaviour is actually correct. Fixed checkstyle warnings.
 
 Upgrade notes:
 - should be transparent.
