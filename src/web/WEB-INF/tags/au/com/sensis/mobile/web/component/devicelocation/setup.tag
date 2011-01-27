@@ -1,4 +1,4 @@
-<%@ tag body-content="empty" isELIgnored="false" %>
+<%@ tag body-content="empty" isELIgnored="false" trimDirectiveWhitespaces="true" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="logging" uri="/au/com/sensis/mobile/web/component/core/logging/logging.tld"%>

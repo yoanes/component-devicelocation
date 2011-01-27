@@ -1,3 +1,11 @@
+==== Version 2.0.6 (tag: devicelocation_v2_0_6) ====
+
+All JSPs and JSP tag files now set trimDirectiveWhitespaces="true".
+
+Now depends on:
+
+    <dependency org="com.sensis" name="wl-core-component" rev="2.0.6" conf="default,test"/>
+
 ==== Version 2.0.5 (tag: devicelocation_v2_0_5) ====
 
 Jiras:

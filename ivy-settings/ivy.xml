@@ -62,7 +62,7 @@
         <!--
           - Dependencies on components.
           -->
-        <dependency org="com.sensis" name="wl-core-component" rev="2.0.4" conf="default,test"/>
+        <dependency org="com.sensis" name="wl-core-component" rev="2.0.6" conf="default,test"/>
         
         <!-- Commons -->
         <dependency org="apache" name="commons-lang" rev="2.4" conf="default" />
@@ -143,6 +143,15 @@
         <dependency org="com.vladium" name="emma" rev="1.2" conf="test->default"/>
 
         <dependency org="com.sensis" name="wl-webapp-testbed" rev="2.0.6" conf="showcase->default"/>
+                
+        <!-- ================================================================================ -->
+        <!-- Exclusions. -->
+        
+        <!-- 
+          - Exclude old versions of ehcache which were from a different org and had a different 
+          - module name. 
+          -->
+        <exclude org="ehcache" module="ehcache" />
                 
     </dependencies>
 </ivy-module>
