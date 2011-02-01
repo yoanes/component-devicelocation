@@ -1,3 +1,7 @@
+==== Version 2.0.7 (tag: devicelocation_v2_0_7) ====
+
+Refactor the YM setting out of the component. The setting now sits in the YM app itself
+
 ==== Version 2.0.6 (tag: devicelocation_v2_0_6) ====
 
 All JSPs and JSP tag files now set trimDirectiveWhitespaces="true".
