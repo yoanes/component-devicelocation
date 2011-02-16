@@ -93,7 +93,7 @@ var DeviceLocation = new Class({
 			this.locate_onLocate(position.coords, position.timestamp);
 		
 		/* return error code 0 (unknown error) if lastRecordedPosition = null */
-		if($empty(this.locate_lastRecordedPosition)) this.locate_parseError({'code': 0, 'message': 'Unknown Error'});
+		if(this.locate_lastRecordedPosition == null) this.locate_parseError({'code': 0, 'message': 'Unknown Error'});
 		
 		else {
 			if($defined(this.locate_postLocate) && this.locate_postLocate instanceof Function)
@@ -202,7 +202,7 @@ var DeviceLocation = new Class({
 		clearTimeout(this._autoLocate_timeoutId);
 		
 		/* return error code 0 (unknown error) if lastRecordedPosition = null */
-		if($empty(this.autoLocate_lastRecordedPosition)) this.autoLocate_parseError({'code': 0, 'message': 'Unknown Error'});
+		if(this.autoLocate_lastRecordedPosition == null) this.autoLocate_parseError({'code': 0, 'message': 'Unknown Error'});
 		
 		else {
 			if($defined(this.autoLocate_postLocate) && this.autoLocate_postLocate instanceof Function)
