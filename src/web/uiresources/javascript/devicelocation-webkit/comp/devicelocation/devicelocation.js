@@ -92,8 +92,12 @@ var DeviceLocation = new Class({
 		if($defined(this.locate_onLocate) && this.locate_onLocate instanceof Function)
 			this.locate_onLocate(position.coords, position.timestamp);
 		
-		if($defined(this.locate_postLocate) && this.locate_postLocate instanceof Function) {
-			this.locate_postLocate(this.locate_lastRecordedPosition.coords, this.autoLocate_lastRecordedPosition.timestamp);
+		/* return error code 0 (unknown error) if lastRecordedPosition = null */
+		if($empty(this.locate_lastRecordedPosition)) this.locate_parseError({'code': 0, 'message': 'Unknown Error'});
+		
+		else {
+			if($defined(this.locate_postLocate) && this.locate_postLocate instanceof Function)
+				this.locate_postLocate(this.locate_lastRecordedPosition.coords, this.locate_lastRecordedPosition.timestamp);
 		}
 	},
 
@@ -196,9 +200,15 @@ var DeviceLocation = new Class({
 	stop: function() {
 		navigator.geolocation.clearWatch(this._autoLocate_locationId);
 		clearTimeout(this._autoLocate_timeoutId);
-		if($defined(this.autoLocate_postLocate) && this.autoLocate_postLocate instanceof Function)
-			this.autoLocate_postLocate(this.autoLocate_lastRecordedPosition.coords, this.autoLocate_lastRecordedPosition.timestamp);
-
+		
+		/* return error code 0 (unknown error) if lastRecordedPosition = null */
+		if($empty(this.autoLocate_lastRecordedPosition)) this.autoLocate_parseError({'code': 0, 'message': 'Unknown Error'});
+		
+		else {
+			if($defined(this.autoLocate_postLocate) && this.autoLocate_postLocate instanceof Function)
+				this.autoLocate_postLocate(this.autoLocate_lastRecordedPosition.coords, this.autoLocate_lastRecordedPosition.timestamp);
+		}
+		
 		this.reset();
 	},
 	
