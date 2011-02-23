@@ -162,12 +162,18 @@ var DeviceLocation = new Class({
 		}
 	},
 	
-	autoLocate_parseError: function(error) {
+	/**
+	 * stop is an optional param to execute stop() on error or not.
+	 * this is to prevent any infinite loop caused by calling parseError() on stop()
+	 */
+	autoLocate_parseError: function(error, stop) {
 		if($defined(this.autoLocate_onError) && this.autoLocate_onError instanceof Function) 
 			this.autoLocate_onError(error);
 		
 		/* stop any further process if exist */
-		this.stop();
+		if(stop == undefined) stop = true;
+		
+		if(stop) this.stop();
 	},
 	
 	/** A locate me once function */
@@ -201,8 +207,9 @@ var DeviceLocation = new Class({
 		navigator.geolocation.clearWatch(this._autoLocate_locationId);
 		clearTimeout(this._autoLocate_timeoutId);
 		
-		/* return error code 0 (unknown error) if lastRecordedPosition = null */
-		if(this.autoLocate_lastRecordedPosition == null) this.autoLocate_parseError({'code': 0, 'message': 'Unknown Error'});
+		/* return custom error code 4 (component unknown error) if lastRecordedPosition = null */
+		if(this.autoLocate_lastRecordedPosition == null) 
+			this.autoLocate_parseError({code: 4, message: 'Component Unknown Error'}, false);
 		
 		else {
 			if($defined(this.autoLocate_postLocate) && this.autoLocate_postLocate instanceof Function)
