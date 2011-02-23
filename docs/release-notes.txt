@@ -1,3 +1,7 @@
+==== Version 2.0.9 (tag: devicelocation_v2_0_9) ====
+
+Put flag on parseError() to prevent inifinte loop of methods calling between stop() and parseError()
+
 ==== Version 2.0.8 (tag: devicelocation_v2_0_8) ====
 
 Safe guard the postLocate() by checking if the lastRecordedPosition != null
