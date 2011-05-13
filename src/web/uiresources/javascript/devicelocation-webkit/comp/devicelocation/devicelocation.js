@@ -28,6 +28,7 @@ var DeviceLocation = new Class({
 	autoLocate_options_timeout: 10000,
 	autoLocate_options_maximumAge: 0,
 	autoLocate_options_enableHighAccuracy: true,
+	autoLocate_options_exitOnError: true,
 	
 	/* if set, the autoLocate will stop after the specified number of tries is reached */
 	autoLocate_limits_tries: null,
@@ -72,6 +73,7 @@ var DeviceLocation = new Class({
 				this.autoLocate_options_timeout = autoLocateObj.options.timeout;
 				this.autoLocate_options_maximumAge = autoLocateObj.options.maximumAge;
 				this.autoLocate_options_enableHighAccuracy = autoLocateObj.options.enableHighAccuracy;
+				this.autoLocate_options_exitOnError = autoLocateObj.options.exitOnError;
 			}
 			
 			if($defined(autoLocateObj.limits)) {
@@ -166,14 +168,13 @@ var DeviceLocation = new Class({
 	 * stop is an optional param to execute stop() on error or not.
 	 * this is to prevent any infinite loop caused by calling parseError() on stop()
 	 */
-	autoLocate_parseError: function(error, stop) {
+	autoLocate_parseError: function(error) {
 		if($defined(this.autoLocate_onError) && this.autoLocate_onError instanceof Function) 
 			this.autoLocate_onError(error);
 		
-		/* stop any further process if exist */
-		if(stop == undefined) stop = true;
-		
-		if(stop) this.stop();
+		/* if the app wants to exis on error */
+		if(this.autoLocate_options_exitOnError)
+			this.stop();
 	},
 	
 	/** A locate me once function */
@@ -199,7 +200,7 @@ var DeviceLocation = new Class({
 			 	 'enableHighAccuracy': this.autoLocate_options_enableHighAccuracy}
 			);
 		
-		if($defined(this.autoLocate_limits_timeout)) 
+		if($defined(this.autoLocate_limits_timeout) && this.autoLocate_limits_timeout > 0) 
 			this._autoLocate_timeoutId = setTimeout(function() {this.stop();}.bind(this), this.autoLocate_limits_timeout);
 	},
 	
@@ -207,15 +208,12 @@ var DeviceLocation = new Class({
 		navigator.geolocation.clearWatch(this._autoLocate_locationId);
 		clearTimeout(this._autoLocate_timeoutId);
 		
-		/* return custom error code 4 (component unknown error) if lastRecordedPosition = null */
-		if(this.autoLocate_lastRecordedPosition == null) 
-			this.autoLocate_parseError({code: 4, message: 'Component Unknown Error'}, false);
+		var finalCoords = this.autoLocate_lastRecordedPosition == null ? null : this.autoLocate_lastRecordedPosition.coords;
+		var finalTimeStamp = this.autoLocate_lastRecordedPosition == null ? null : this.autoLocate_lastRecordedPosition.timestamp;
 		
-		else {
-			if($defined(this.autoLocate_postLocate) && this.autoLocate_postLocate instanceof Function)
-				this.autoLocate_postLocate(this.autoLocate_lastRecordedPosition.coords, this.autoLocate_lastRecordedPosition.timestamp);
-		}
-		
+		if($defined(this.autoLocate_postLocate) && this.autoLocate_postLocate instanceof Function)
+			this.autoLocate_postLocate(finalCoords, finalTimeStamp);
+				
 		this.reset();
 	},
 	
@@ -227,5 +225,16 @@ var DeviceLocation = new Class({
 		
 		/* reset the previous result at the end */ 
 		this.autoLocate_lastRecordedPosition = null;
+	},
+	
+	softReset: function() {
+		if(this._autoLocate_locationId != null) {
+			navigator.geolocation.clearWatch(this._autoLocate_locationId);
+			
+			if(this._autoLocate_timeoutId != null)
+				clearTimeout(this._autoLocate_timeoutId);
+			
+			this.reset();
+		}
 	}
 });
