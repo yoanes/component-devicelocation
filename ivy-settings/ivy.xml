@@ -54,7 +54,7 @@
     <dependencies>
     
         <!-- Shared build scripts required by this project. -->    
-        <dependency org="com.sensis" name="wl-build-scripts" rev="2.0.9" conf="buildBootstrap->default" />
+        <dependency org="com.sensis" name="wl-build-scripts" rev="2.1.2" conf="buildBootstrap->default" />
         
         <!--  Content Rendering Framework -->
         <dependency org="com.sensis" name="wl-crf" rev="0.1.2-103" conf="default" />
@@ -142,7 +142,7 @@
         <dependency org="com.unitedinternet" name="logging-selenium" rev="1.2" conf="test->default"/>
         <dependency org="com.vladium" name="emma" rev="1.2" conf="test->default"/>
 
-        <dependency org="com.sensis" name="wl-webapp-testbed" rev="2.0.6" conf="showcase->default"/>
+        <dependency org="com.sensis" name="wl-webapp-testbed" rev="2.1.0" conf="showcase->default"/>
                 
         <!-- ================================================================================ -->
         <!-- Exclusions. -->

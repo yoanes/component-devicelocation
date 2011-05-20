@@ -44,7 +44,22 @@
     <!-- Private targets (names start with a hyphen so they cannot be executed directly). -->
     
     <!-- Top level target to initialize all properties. -->
-    <target name="-bootstrap-init-props" depends="-bootstrap-init-dir-props, -bootstrap-init-lib-props, -bootstrap-init-ivy-props"/>
+    <target name="-bootstrap-init-props" depends="-init-user-props, -bootstrap-init-dir-props, -bootstrap-init-lib-props, -bootstrap-init-ivy-props"/>
+
+    <target name="-init-env-prop-access">
+        <!-- load environment vars into properties, with 'env' prefix -->
+        <property environment="env"/>
+    </target>
+
+    <target name="-init-user-props" depends="-init-env-prop-access">
+
+        <!--
+          - Source user specific properties file. Developers can use this
+          - to set user specific variables, such as ivy cache locations.
+          -->
+        <echo message="Looking for user properties from: ${basedir}/user.${env.USERNAME}.properties" />
+        <property file="${basedir}/user.${env.USERNAME}.properties"/>
+    </target>
     
     <target name="-bootstrap-init-dir-props">
         <!-- Location to install the shared build scripts, relative to the project being built. -->
@@ -101,7 +116,7 @@
         
         <echo message="Ensuring that any existing installation is writable (Windows only for now) ..." />
         <attrib readonly="false" hidden="false" verbose="true">
-        	<fileset dir="${shared.build.scripts.dir}" includes="**/*"/>
+            <fileset dir="${shared.build.scripts.dir}" includes="**/*"/>
          </attrib>
 
         <unzip dest="${shared.build.scripts.dir}" 
@@ -110,11 +125,11 @@
             
             <fileset dir="${lib.dir}/zip/buildBootstrap" includes="${build.scripts.zip.fileset.pattern}"/>                  
         </unzip>
-    	
+        
         <echo message="Ensuring that the installation is readonly and hidden (Windows only for now) ..." />
-    	<attrib readonly="true" hidden="true" verbose="true">
-    		<fileset dir="${shared.build.scripts.dir}" includes="**/*" excludes="generated/**/*" />
-    	</attrib>
+        <attrib readonly="true" hidden="true" verbose="true">
+            <fileset dir="${shared.build.scripts.dir}" includes="**/*" excludes="generated/**/*" />
+        </attrib>
         
         <echo message="Shared build scripts installed to ${shared.build.scripts.dir}."/>
     </target>
