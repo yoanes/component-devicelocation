@@ -13,9 +13,7 @@
         <property name="locations">
             <list>
                 <value>classpath:/au/com/sensis/mobile/web/component/devicelocation/devicelocation-component.properties</value>
-                
-                <!-- Load a platform dependent environment properties file. -->
-                <value>classpath:/au/com/sensis/mobile/web/component/devicelocation/devicelocation-environment.properties.@{global.platform}</value>
+                <value>classpath:/devicelocation-environment.properties</value>
             </list>
         </property>
     </bean>                
@@ -31,7 +29,6 @@
         <property name="locations">
             <list>
                 <value>classpath:/devicelocation-component.properties</value>
-                <value>classpath:/devicelocation-environment.properties</value>
             </list>
         </property>
         
