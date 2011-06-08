@@ -3,26 +3,32 @@
 <crf:ui-configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns:crf="http://mobile.sensis.com.au/web/crf/config"
          xsi:schemaLocation="http://mobile.sensis.com.au/web/crf/config crf-config.xsd">
-         
-	<config-path>comp/devicelocation</config-path>         
-    <groups>    
-    	<group name="devicelocation-webkit" expr="( 
-    			device.isA('Apple') 
-                    and (device.getUserAgent() !~ '.*OS [012]_.*') 
+
+  <config-path>comp/devicelocation</config-path>
+    <groups>
+      <group name="devicelocation-webkit" expr="(
+          device.isA('Apple')
+                    and (device.getUserAgent() !~ '.*OS [012]_.*')
                     and (device.getUserAgent() !~ '.*OS 3_0.*')
-    		) or (
-    			device.isA('Android-OS') and (device.getUserAgent() !~ '.*Android 1.*') 
-    		)" />
-    		
+        ) or (
+                  (
+                   (device.isA('Android-OS') and !device.isA('Samsung-GT-I9000'))
+                      and (device.getUserAgent() !~ '.*Android 1.*')
+                  ) or (
+                   device.isA('Samsung-GT-I9000')
+                      and (device.getUserAgent() !~ '.*Android 2.3.3.*')
+                  )
+        )" />
+
         <!--
-          - Disabling black berry 9000 support. Even though we have the JavaScript for it, it 
+          - Disabling black berry 9000 support. Even though we have the JavaScript for it, it
           - was never actually enabled in the old Volantis MCS component and, hence, never tested.
-          - Furthermore, the requirements were changed so that it was out of scope.  
+          - Furthermore, the requirements were changed so that it was out of scope.
           -->
-        <!-- 
-    	<group name="devicelocation-rim" expr="device.isA('RIM-Blackberry-9000')"/>
+        <!--
+      <group name="devicelocation-rim" expr="device.isA('RIM-Blackberry-9000')"/>
         -->
-    
-    	<default-group name="default" />
+
+      <default-group name="default" />
     </groups>
 </crf:ui-configuration>
