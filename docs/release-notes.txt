@@ -1,3 +1,11 @@
+==== Version 3.0.0 (tag: devicelocation_v3_0_0) ====
+
+Upgraded to CRF 2.0.12.
+
+Upgrade steps:
+- This version depends on CRF 2.x so don't upgrade unless you're okay with pulling in this 
+  dependency.
+
 ==== Version 2.0.13 (tag: devicelocation_v2_0_13) ====
 
 Addition of condition for Samsung Galaxy S (Samsung-GT-I9000) with Android Gingerbread (2.3.3)

@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 
-<project name="wl-devicelocation-component">
+<project name="wl-devicelocation-component"
+    xmlns:local="antlib:wl-devicelocation-component">
 
     <description>Builds the devicelocation-component.</description>
 
@@ -21,27 +22,44 @@
     <!-- ==================================================================================== -->
     <!-- Import shared build scripts. --> 
     <import file="shared-build-scripts/src/toplevel/build-component-with-showcase-support.xml" />
-	
-	
+    
+    
     <target name="showcase-prepare-resources-for-package" 
         depends="build-showcase-prepare-resources-for-package.showcase-prepare-resources-for-package">
         
         <echo message="crf: Overriding showcase showcase-prepare-resources-for-package target to add additional steps." />
 
-        <!-- 
-          - Webapp context path for the showcase. Default value is empty, which means the app is assumd to be the
-          - default app.
-          -->
-        <property name="showcase.context.path" value=""/>
+        <local:crf-config todir="${showcase.classes.dir}" />
 
-        <!-- CRF -->
-        <copy tofile="${showcase.classes.dir}/crf-environment.properties" overwrite="true" 
-            file="${showcase.cfg.dir}/crf-environment.properties.${project.platform}" >
-            <filterset>
-                <filter token="TOMCAT_HOME" value="${tomcat.home}" />
-                <filter token="WEBAPP_CONTEXT_PATH" value="${showcase.context.path}" />
-            </filterset>
-        </copy>
+    </target>   
+    
+    <target name="do-showcase-hotswap"
+        depends="build-showcase-hotswap.do-showcase-hotswap">
+    
+        <echo message="crf: Overriding showcase do-showcase-hotswap target to add additional steps." />
+            
+        <local:crf-config todir="${hotswap.server.webapps.dir}/${showcase.webapp.name}/WEB-INF/classes"/>
+    </target>
+    
+    <macrodef name="crf-config" uri="antlib:wl-devicelocation-component">
+        <attribute name="todir" />
+        <sequential>
+            <!-- 
+              - Webapp context path for the showcase. Default value is empty, which means the app is assumd to be the
+              - default app.
+              -->
+            <property name="showcase.context.path" value=""/>
+                
+        
+            <!-- CRF -->
+            <copy tofile="@{todir}/crf-environment.properties" overwrite="true" 
+                file="${showcase.cfg.dir}/crf-environment.properties.${project.platform}" >
+                <filterset>
+                    <filter token="TOMCAT_HOME" value="${tomcat.home}" />
+                    <filter token="WEBAPP_CONTEXT_PATH" value="${showcase.context.path}" />
+                </filterset>
+            </copy>
+        </sequential>
+    </macrodef>
 
-    </target>	
 </project>
