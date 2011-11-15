@@ -56,7 +56,8 @@ _DEVICELOCATION_WM_.AutoLocate.onlocate = function(position) {
 			if(_DEVICELOCATION_WM_.marker != null)
 				MAP.instances[0].Map.markersLayer.removeMarker(_DEVICELOCATION_WM_.marker);
 			else MAP.instances[0].clearPois();
-			
+	
+			/*
 			var locateMeIcon =  [{url: '/imageserver/common/images/component/map/markers/standard/icon_emscell_28x28.png',
 						  width: 28 , height: 28 , offsetX: -14 , offsetY: -14, 
 						  coordinates: { latitude: position.latitude , longitude: position.longitude }
@@ -72,6 +73,14 @@ _DEVICELOCATION_WM_.AutoLocate.onlocate = function(position) {
 				};
 			
 			_DEVICELOCATION_WM_.marker = MAP.instances[0].addPoi(locateMeMarker, locateMeIcon);
+			*/
+			
+			// It creates default EMS crossHair icon and downloads the image from EMS as well
+			var lonlat = new EMS.LonLat(position.longitude, position.latitude);
+			var icon = EMS.Services.StandardIcons.crossHair();
+			var marker = new OpenLayers.Marker(lonlat, icon);			
+			
+			_DEVICELOCATION_WM_.marker = MAP.instances[0].Map.markersLayer.addMarker(marker);
 		}
 	});
 	

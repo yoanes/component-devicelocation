@@ -1,3 +1,10 @@
+==== Version 3.0.1 (tag: devicelocation_v3_0_1) ====
+
+Fixed cross hair icon. It creates default EMS crossHair icon and downloads the image from EMS as well.
+
+Upgrade steps:
+- should be transparent.
+  
 ==== Version 3.0.0 (tag: devicelocation_v3_0_0) ====
 
 Upgraded to CRF 2.0.12.
