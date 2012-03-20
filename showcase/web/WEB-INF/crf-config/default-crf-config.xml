@@ -25,7 +25,7 @@
     			device.isA('Apple') and 
     				(device.getUserAgent() !~ '.*OS [012]_.*' or device.getUserAgent() !~ '.*OS 3_0.*')
     		) or (
-    			device.isA('Android-OS') and (device.getUserAgent() !~ '.*Android 1.*') 
+    			device.supportsOs('Android') and (device.getUserAgent() !~ '.*Android 1.*') 
     		)" />
     		
     	<group name="rim" expr="device.isA('RIM-Blackberry-9000')"/>

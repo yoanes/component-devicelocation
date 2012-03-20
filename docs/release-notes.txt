@@ -1,3 +1,13 @@
+==== Version 4.0.???
+
+Migrated to use WURFL based CRF 3.x.
+Removed any Volantis dependencies.
+Please CRF release notes for further details about the wurfl migration.
+
+Upgrade Steps:
+
+None.
+
 ==== Version 3.0.1 (tag: devicelocation_v3_0_1) ====
 
 Fixed cross hair icon. It creates default EMS crossHair icon and downloads the image from EMS as well.

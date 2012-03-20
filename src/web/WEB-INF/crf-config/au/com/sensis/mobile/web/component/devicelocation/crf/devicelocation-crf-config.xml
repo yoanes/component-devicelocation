@@ -12,7 +12,7 @@
                     and (device.getUserAgent() !~ '.*OS 3_0.*')
         ) or (
                   (
-                   (device.isA('Android-OS') and !device.isA('Samsung-GT-I9000'))
+                   (device.supportsOs('Android') and !device.isA('Samsung-GT-I9000'))
                       and (device.getUserAgent() !~ '.*Android 1.*')
                   ) or (
                    device.isA('Samsung-GT-I9000')

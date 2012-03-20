@@ -1,0 +1,6 @@
+########################################################
+## ENVIRONMENT : devicelocation-showcase DESK overrides
+########################################################
+
+# Enable/disable the JavaScript logger for this environment.
+env.javascript.logger.enabled=true

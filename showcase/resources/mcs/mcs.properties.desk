@@ -1,8 +1,0 @@
-mcs.devicerepository.filepath=D:/var/mcs/devices/devices.mdpr
-mcs.policies.filepath=D:/var/mcs/
-
-mcs.mgrp.component.scripts.base.url=/wl-devicelocation-component-showcase/comp/
-mcs.mgrp.component.images.base.url=http://localhost:8080/common-imageserver/images/component/
-
-mcs.cache.policies=false
-mcs.script.asset.path=/wl-devicelocation-component-showcase/scripts/
