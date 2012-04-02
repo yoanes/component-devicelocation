@@ -1,8 +1,8 @@
-==== Version 4.0.???
+==== Version 4.0.0 (tag: devicelocation_v4_0_0) ====
 
 Migrated to use WURFL based CRF 3.x.
 Removed any Volantis dependencies.
-Please CRF release notes for further details about the wurfl migration.
+Please see CRF release notes for further details about the wurfl migration.
 
 Upgrade Steps:
 

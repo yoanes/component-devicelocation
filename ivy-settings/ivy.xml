@@ -57,12 +57,12 @@
         <dependency org="com.sensis" name="wl-build-scripts" rev="2.5.8" conf="buildBootstrap->default" />
         
         <!--  Content Rendering Framework -->
-        <dependency org="com.sensis" name="wl-crf" rev="3.0.0.wurfl-snapshot-2" conf="default" />
+        <dependency org="com.sensis" name="wl-crf" rev="3.0.0.30" conf="default" />
         
         <!--
           - Dependencies on components.
           -->
-        <dependency org="com.sensis" name="wl-core-component" rev="4.0.wurfl-snapshot-1" conf="default,test"/>
+        <dependency org="com.sensis" name="wl-core-component" rev="4.0.0" conf="default,test"/>
         
         <!-- Commons -->
         <dependency org="apache" name="commons-lang" rev="2.4" conf="default" />
@@ -116,7 +116,7 @@
 
         <!-- SDP Common -->
         <dependency org="com.sensis" name="sdpCommon-logging" rev="0.5" conf="default"/>        
-        <dependency org="com.sensis" name="sdpCommon-web" rev="3.0-wurfl-snapshot-6" conf="default"/>
+        <dependency org="com.sensis" name="sdpCommon-web" rev="3.0-001" conf="default"/>
         <dependency org="com.sensis" name="sdpCommon-manager" rev="1.1.0" conf="default"/>
 
         <!-- Hibernate Persistence -->
@@ -144,7 +144,7 @@
          
         <dependency org="com.vladium" name="emma" rev="1.2" conf="test->default"/>
 
-        <dependency org="com.sensis" name="wl-webapp-testbed" rev="3.0.wurfl-snapshot-5" conf="showcase->default"/>
+        <dependency org="com.sensis" name="wl-webapp-testbed" rev="3.0.0" conf="showcase->default"/>
                 
         <!-- ================================================================================ -->
         <!-- Exclusions. -->
