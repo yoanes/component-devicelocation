@@ -1,3 +1,6 @@
+==== Version 4.0.1 (tag: devicelocation_v4_0_1) ====
+Disable THUB 2.
+
 ==== Version 4.0.0 (tag: devicelocation_v4_0_0) ====
 
 Migrated to use WURFL based CRF 3.x.

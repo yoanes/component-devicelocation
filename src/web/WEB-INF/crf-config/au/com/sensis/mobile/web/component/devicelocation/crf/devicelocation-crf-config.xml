@@ -14,6 +14,7 @@
                   (
                    (device.supportsOs('Android') and !device.isA('Samsung-GT-I9000'))
                       and (device.getUserAgent() !~ '.*Android 1.*')
+                      and (!device.isA('Sagem-HomeManager2-2.3'))
                   ) or (
                    device.isA('Samsung-GT-I9000')
                       and (device.getUserAgent() !~ '.*Android 2.3.3.*')
