@@ -6,6 +6,12 @@
 
   <config-path>comp/devicelocation</config-path>
     <groups>
+    
+    <!--  target the ios 5.0 specifically -->
+      <group name="devicelocation-ios5" expr="(
+	     device.is('Apple') and device.getUserAgent() ~= '.*OS 5_0.*'))
+	   )" />
+	
       <group name="devicelocation-webkit" expr="(
           device.isA('Apple')
                     and (device.getUserAgent() !~ '.*OS [012]_.*')
@@ -20,7 +26,7 @@
                       and (device.getUserAgent() !~ '.*Android 2.3.3.*')
                   )
         )" />
-
+        
         <!--
           - Disabling black berry 9000 support. Even though we have the JavaScript for it, it
           - was never actually enabled in the old Volantis MCS component and, hence, never tested.
