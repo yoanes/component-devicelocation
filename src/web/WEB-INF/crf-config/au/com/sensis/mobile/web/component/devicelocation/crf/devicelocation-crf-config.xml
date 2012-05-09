@@ -9,7 +9,7 @@
     
     <!--  target the ios 5.0 specifically -->
       <group name="devicelocation-ios5" expr="(
-	     device.isA('Apple') and device.getUserAgent() ~= '.*OS 5_0.*'
+	     device.isA('Apple') and (device.getUserAgent() =~ '.*OS 5_0.*')
 	   )" />
 	
       <group name="devicelocation-webkit" expr="(

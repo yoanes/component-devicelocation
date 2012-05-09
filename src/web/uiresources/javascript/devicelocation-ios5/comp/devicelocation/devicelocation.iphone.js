@@ -4,6 +4,13 @@ DeviceLocation.implement({
 		if($defined(this.autoLocate_preLocate) && this.autoLocate_preLocate instanceof Function)
 			this.autoLocate_preLocate();
 		
+		/* first hit we don't want to wait */
+		navigator.geolocation.getCurrentPosition(this.autoLocate_parseLocation.bind(this), this.autoLocate_parseError.bind(this),
+				{'maximumAge': this.autoLocate_options_maximumAge, 
+				 'timeout': this.autoLocate_options_timeout, 
+				 'enableHighAccuracy': this.autoLocate_options_enableHighAccuracy}
+				);	
+		
 		this._autoLocate_locationId = setInterval(function(){
 			navigator.geolocation.getCurrentPosition(this.autoLocate_parseLocation.bind(this), this.autoLocate_parseError.bind(this),
 				{'maximumAge': this.autoLocate_options_maximumAge, 

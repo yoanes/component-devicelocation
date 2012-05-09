@@ -1,3 +1,6 @@
+==== Version 4.0.3 (tag: devicelocation_v4_0_3) ====
+Bug fix on ios 5
+
 ==== Version 4.0.2 (tag: devicelocation_v4_0_2) ====
 Create a variant for ios 5.0
 
